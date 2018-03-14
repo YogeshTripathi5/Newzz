@@ -18,9 +18,8 @@ import com.squareup.picasso.Picasso;
 import java.util.Date;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import terribleappsdevs.com.newzz.Common.ISO8601DateParser;
-import terribleappsdevs.com.newzz.DetailActivity;
+import terribleappsdevs.com.newzz.activity.DetailActivity;
 import terribleappsdevs.com.newzz.Interface.ItemClickListener;
 import terribleappsdevs.com.newzz.R;
 import terribleappsdevs.com.newzz.model.Article;

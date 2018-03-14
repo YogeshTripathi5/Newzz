@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+
+     <EditText
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_20"
+        android:background="@drawable/border"
+        android:backgroundTint="@android:color/darker_gray"
+        android:drawableLeft="@drawable/ic_action_action_search"
+        android:drawablePadding="@dimen/margin_20"
+        android:hint="@string/Anything"
+        android:padding="@dimen/margin_16dp"
+
+        />
+
+
+
+
+    <com.yuyakaido.android.cardstackview.CardStackView
+        android:id="@+id/activity_main_card_stack_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_view"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        app:elevationEnabled="true"
+        app:leftOverlay="@layout/overlay_left"
+        app:rightOverlay="@layout/overlay_right"
+        app:scaleDiff="0.02"
+        app:stackFrom="bottom"
+        app:swipeDirection="freedom_no_bottom"
+        app:swipeEnabled="true"
+        app:swipeThreshold="0.75"
+        app:topOverlay="@layout/overlay_top"
+        app:translationDiff="12"
+        app:visibleCount="3" />
+
+    <ProgressBar
+        android:id="@+id/activity_main_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

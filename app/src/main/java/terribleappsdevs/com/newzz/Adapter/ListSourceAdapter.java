@@ -1,7 +1,9 @@
 package terribleappsdevs.com.newzz.Adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,24 +11,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.like.LikeButton;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
 import terribleappsdevs.com.newzz.Common.Common;
 import terribleappsdevs.com.newzz.Interface.IconBetterIdeaService;
 import terribleappsdevs.com.newzz.Interface.ItemClickListener;
-import terribleappsdevs.com.newzz.ListNews;
+import terribleappsdevs.com.newzz.activity.ListNews;
 import terribleappsdevs.com.newzz.R;
-import terribleappsdevs.com.newzz.model.IconBetterIdea;
-import terribleappsdevs.com.newzz.model.Website;
+import terribleappsdevs.com.newzz.model.Source;
 
 /**
  * Created by admin1 on 7/10/17.
@@ -36,8 +38,10 @@ class ListSourceViewHolder extends RecyclerView.ViewHolder implements View.OnCli
 
     ItemClickListener itemClickListener;
     TextView source_name;
-    ImageView source_image;
+    CircleImageView source_image;
     CardView card,grid_card;
+    Dialog dialog;
+    LikeButton likebutton;
 
     public ListSourceViewHolder(View itemView) {
         super(itemView);
@@ -47,7 +51,7 @@ class ListSourceViewHolder extends RecyclerView.ViewHolder implements View.OnCli
         source_name = itemView.findViewById(R.id.source_name);
         card = itemView.findViewById(R.id.card);
         grid_card = itemView.findViewById(R.id.grid_card);
-
+        likebutton = itemView.findViewById(R.id.likebutton);
         itemView.setOnClickListener(this);
 
     }
@@ -58,6 +62,8 @@ class ListSourceViewHolder extends RecyclerView.ViewHolder implements View.OnCli
 
     @Override
     public void onClick(View view) {
+
+
         try {
             itemClickListener.onClick(view, getAdapterPosition(), false);
         }catch (Exception e)
@@ -71,35 +77,60 @@ class ListSourceViewHolder extends RecyclerView.ViewHolder implements View.OnCli
 }
 
 public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder> {
-
+//    public Realm realm = Realm.getDefaultInstance();
     private Context context;
-    private Website website;
+    //private Website website;
+    ArrayList<Source> sources;
+    ArrayList<Source> favsources;
+    ArrayList<Source> tempSources;
     private IconBetterIdeaService mservice;
-    boolean list;
-    ArrayList<String> list1;
+    boolean list,grid;
+    Source source = new Source();
+    JSONObject jsonObject = new JSONObject();
+    OnLikeItemClick onLikeItemClick;
     private int lastPosition=-1;
-
-    public ListSourceAdapter(Context context, Website website, boolean list, ArrayList<String> list1) {
+//Website websitelist ;
+    public ListSourceAdapter(Context context, ArrayList<Source> website, boolean list, boolean grid) {
         this.context = context;
-        this.website = website;
+        this.sources = website;
         mservice = Common.getIconService();
         this.list = list;
-        this.list1 = list1;
+        this.grid = grid;
+        tempSources = new ArrayList<>(website);
+
+        favsources = new ArrayList<>();
 
 
+    }
+
+    public interface OnLikeItemClick
+    {
+
+        void click(int position);
+    }
+
+    public void setOnLikeItemClick(final OnLikeItemClick onLikeItemClick ){
+
+
+        this.onLikeItemClick = onLikeItemClick;
     }
 
     @Override
     public ListSourceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View itemView;
-        if (list == false) {
+        if (list == false && grid==true) {
             itemView = layoutInflater.inflate(R.layout.source_layout_grid, parent, false);
 
 
-        } else {
+        }  else if (grid==false && list ==true){
 
             itemView = layoutInflater.inflate(R.layout.source_layout, parent, false);
+        }
+        else
+        {
+            itemView = layoutInflater.inflate(R.layout.source_layout,parent,false);
+
         }
         return new ListSourceViewHolder(itemView);
     }
@@ -108,64 +139,87 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
     public void onBindViewHolder(final ListSourceViewHolder holder, final int position) {
 
 
+            if (holder.grid_card!=null) {
+                holder.likebutton.setTag(sources.get(position));
+            }
+            if (holder.card!=null) {
+                holder.likebutton.setTag(sources.get(position));
+            }
+        if(sources.get(position).getLiked())
+            holder.likebutton.setLiked(true);
+        else
+            holder.likebutton.setLiked(false);
+        holder.source_name.setText(sources.get(position).getName());
+
+        Picasso.with(context).load(sources.get(position).getLogoUrl())
+                .into(holder.source_image);
 
 
+      /*  String like;
+        SharedPreferences preferences = context.getSharedPreferences("fav",Context.MODE_PRIVATE);
+         like=  preferences.getString("fav","x");
 
-        holder.source_name.setText(website.getSources().get(position).getName());
-
+        if (like.equals("true"))
+       holder.likebutton.setLiked(true);
+*/
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int pos, boolean isLongClick) {
                 Intent intent = new Intent(context,ListNews.class);
-                intent.putExtra("source",website.getSources().get(position).getId());
-                intent.putExtra("sortBy",website.getSources().get(position).getSortBysAvailable().get(0)); //get default sortby method
+                intent.putExtra("source",sources.get(position).getId());
+                intent.putExtra("sortBy",sources.get(position).getSortBysAvailable().get(0)); //get default sortby method
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
 
             }
         });
-        if (holder.card!=null)
-            setAnimation(holder.card, position);
-        if (holder.grid_card!=null)
-            setAnimation(holder.grid_card, position);
 
 
-/*
-        StringBuilder iconBetterAPI = new StringBuilder("https://autocomplete.clearbit.com/v1/companies/suggest");
-        iconBetterAPI.append(list1.get(position));
-
-        String data = iconBetterAPI.toString();*/
-
+            if (holder.card != null)
+                setAnimation(holder.card, position);
+            if (holder.grid_card != null)
+                setAnimation(holder.grid_card, position);
 
 
-
-     /*   mservice.getIconUrl(list1.get(position)).enqueue(new Callback<ArrayList<IconBetterIdea>>() {
-            @Override
-            public void onResponse(Call<ArrayList<IconBetterIdea>> call, Response<ArrayList<IconBetterIdea>> response) {
-
-                try {
-                    if (response.body().get(position).getLogo() != null) {
-
-                            Picasso.with(context).load(response.body().get(position).getLogo())
-                                    .into(holder.source_image);
+            holder.likebutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /*realm.beginTransaction();
+                    Favourite favourite = realm.createObject(Favourite.class);
+                    favourite.setWishlist(true);
+                    favourite.setPostion(position);
+                    holder.likebutton.setLiked(true);
+                    holder.likebutton.setAnimationScaleFactor(2);
+                    holder.likebutton.setEnabled(true);
+                    realm.commitTransaction();
+*/
 
 
 
+
+              /*      source = (Source) v.getTag();*/
+
+
+                    onLikeItemClick.click(position);
+
+
+                   /* source.setLiked(true);
+                    try {
+                        jsonObject.put(source.getId(),true);
+
+                        SharedPreferences.Editor editor = context.getSharedPreferences("fav",Context.MODE_PRIVATE).edit();
+                        editor.putString("fav",jsonObject.toString());
+                        editor.commit();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+*/
+
                 }
+            });
 
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<IconBetterIdea>> call, Throwable t) {
-
-
-
-            }
-        });*/
 
     }
     private void setAnimation(View viewToAnimate, int position)
@@ -180,8 +234,29 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
     }
 
 
+    public void setFilter(String str)
+    {
+
+
+        if(!str.trim().isEmpty()) {
+            sources = new ArrayList<>();
+            for (Source obj:tempSources) {
+                if(obj.getName().toLowerCase().contains(str)){
+                    sources.add(obj);
+                }
+            }
+            notifyDataSetChanged();
+        }else{
+            if(sources.size()!=tempSources.size()) {
+                sources.addAll(tempSources);
+                notifyDataSetChanged();
+            }
+        }
+
+    }
+
     @Override
     public int getItemCount() {
-        return website.getSources().size();
+        return sources.size();
     }
 }

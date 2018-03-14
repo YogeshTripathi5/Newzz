@@ -3,6 +3,7 @@ package terribleappsdevs.com.newzz.Interface;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Url;
+import terribleappsdevs.com.newzz.model.Article;
 import terribleappsdevs.com.newzz.model.News;
 import terribleappsdevs.com.newzz.model.Website;
 
@@ -17,4 +18,10 @@ public interface NewsService {
 
     @GET
     Call<News> getNewestArticles(@Url String url);
+
+    @GET()
+    Call<News> getNewsOnBasisOfCategory(@Url String url);
+
+    @GET()
+    Call<News> getEveryThing(@Url String url);
 }

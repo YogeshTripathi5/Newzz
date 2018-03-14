@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#9C27B0</color>
-    <color name="primary_dark">#0288d1</color>
-    <color name="primary_dark_trans">#7c000000</color>
-    <color name="primary_light">#E1BEE7</color>
-    <color name="accent">#03a9f4</color>
-    <color name="primary_text">#212121</color>
-    <color name="secondary_text">#757575</color>
-    <color name="icons">#FFFFFF</color>
-    <color name="divider">#BDBDBD</color>
-    <color name="white">#FFF</color>
+    <color name="colorPrimary">#a800b4e6</color>
+    <color name="colorPrimaryDark">#00b4e6</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#fff</color>
     <color name="black">#000</color>
+    <color name="accent">#000</color>
+    <color name="primary_dark">#FFF</color>
+    <color name="startblue">#000</color>
+
+
+
+
+    <color name="blueStart">#4EFFF3</color>
+    <color name="blueEnd">#0ca6f9</color>
+    <color name="purpleStart">#a369ff</color>
+    <color name="purpleEnd">#0e56ff</color>
+    <color name="roseStart">#FF6A00</color>
+    <color name="roseEnd">#ef0276</color>
+    <color name="greenStart">#a7f56e</color>
+    <color name="greenEnd">#11c612</color>
+
+
+    <color name="blue">#303F9F</color>
+    <color name="green">#4CAF50</color>
+    <color name="green_teal">#009688</color>
+    <color name="purple">#673AB7</color>
+    <color name="red">#F44336</color>
+    <color name="cyan">#00BCD4</color>
+    <color name="lime">#CDDC39</color>
+    <color name="accent_color">@color/blue</color>
+    <color name="statusBarColor">@color/blue</color>
+    <color name="navigationBarColor">@android:color/black</color>
+    <color name="drawerArrowColor">@android:color/white</color>
 </resources>

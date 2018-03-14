@@ -46,6 +46,16 @@ public class Source {
     private String counrty;
     private UrlsToLogos urlsToLogos;
     private List<String> sortBysAvailable;
+    private String logoUrl;
+    private boolean isLiked=false;
+
+    public boolean getLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
+    }
 
     public Source() {
     }
@@ -133,5 +143,13 @@ public class Source {
 
     public void setSortBysAvailable(List<String> sortBysAvailable) {
         this.sortBysAvailable = sortBysAvailable;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 }

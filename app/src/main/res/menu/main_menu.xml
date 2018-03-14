@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-
-
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item  android:id="@+id/List"
-        android:title="List"/>
-    <item  android:id="@+id/Grid"
         android:title="Grid"/>
-    <item  android:id="@+id/About"
-        android:title="About"/>
-    <item  android:id="@+id/Logout"
+
+     <item  android:id="@+id/Logout"
         android:title="Logout"/>
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_action_action_search"
+        android:orderInCategory="100"
+        android:title="@string/abc_search_hint"
+        app:showAsAction="always" />
 
 </menu>

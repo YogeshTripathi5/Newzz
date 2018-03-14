@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="category">
+
+
+
+        <item>Business</item>
+        <item>General</item>
+        <item>Health</item>
+        <item>Science</item>
+        <item>Sports</item>
+        <item>Technology</item>
+        <item>Entertainment</item>
+
+    </string-array>
+
+    <integer-array name="images">
+        <item>@drawable/business</item>
+        <item>@drawable/general</item>
+        <item>@drawable/health</item>
+        <item>@drawable/science</item>
+        <item>@drawable/sports</item>
+        <item>@drawable/tech</item>
+        <item>@drawable/entertainment</item>
+
+    </integer-array>
+
+    <integer-array name="colors">
+        <item>@color/roseStart</item>
+        <item>@color/roseEnd</item>
+        <item>@color/blueStart</item>
+        <item>@color/blueEnd</item>
+        <item>@color/greenStart</item>
+        <item>@color/greenEnd</item>
+        <item>@color/purpleStart</item>
+        <item>@color/purpleEnd</item>
+    </integer-array>
+
+</resources>

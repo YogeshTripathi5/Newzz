@@ -37,4 +37,26 @@ public class Common {
                 .append(apikey)
                 .toString();
     }
+
+    //https://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=8bc18e4d02b6428683117e94543cd467
+    public static  String getNewsApiUrl(String country,String cat,String apikey){
+
+        StringBuilder apiUrl = new StringBuilder("https://newsapi.org/v2/top-headlines?country=");
+        return apiUrl.append(country)
+                .append("&category=")
+                .append(cat)
+                .append("&apiKey=")
+                .append(apikey)
+                .toString();
+    }
+    //https://newsapi.org/v2/everything?q=bitcoin&apiKey=API_KEY
+    public static  String getEverythingApiUrl(String querry,String apikey){
+
+        StringBuilder apiUrl = new StringBuilder("https://newsapi.org/v2/everything?q=");
+        return apiUrl.append(querry)
+                .append("&language=en")
+                .append("&apiKey=")
+                .append(apikey)
+                .toString();
+    }
 }

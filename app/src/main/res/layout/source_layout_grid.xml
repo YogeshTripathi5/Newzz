@@ -1,39 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    app:cardElevation="8dp"
+    android:layout_height="wrap_content"
+    app:cardElevation="5dp"
     android:id="@+id/grid_card"
-    android:layout_margin="3dp"
-    app:cardBackgroundColor="@android:color/background_dark"
-    >
+    app:cardCornerRadius="5dp"
+    android:layout_margin="5dp"
+    app:contentPadding="10dp"
+    app:cardBackgroundColor="@color/white">
+
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.like.LikeButton
+            android:id="@+id/likebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            app:anim_scale_factor="2"
+            app:circle_end_color="@color/colorAccent"
+            app:circle_start_color="@color/colorPrimary"
+            app:dots_primary_color="@color/colorAccent"
+            app:dots_secondary_color="@color/colorPrimary"
+            app:icon_size="25dp"
+            app:icon_type="Star"
+            app:is_enabled="true"
+            app:like_drawable="@drawable/heart_on"
+            app:liked="false"
+            app:unlike_drawable="@drawable/heart_off" />
+
+    </RelativeLayout>
+
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         >
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/source_image"
             android:scaleType="centerCrop"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@drawable/a"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
             />
 
         <TextView
             android:id="@+id/source_name"
             android:layout_below="@id/source_image"
             android:layout_centerInParent="true"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:maxLines="1"
+            android:layout_marginTop="5dp"
             android:fontFamily="serif"
             android:gravity="center"
-            android:textColor="#FFF"
+            android:textColor="#000"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"

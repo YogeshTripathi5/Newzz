@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/swipe"
-    tools:context="terribleappsdevs.com.newzz.ListNews">
+    tools:context="terribleappsdevs.com.newzz.activity.ListNews">
 
 <RelativeLayout
     android:layout_width="match_parent"
