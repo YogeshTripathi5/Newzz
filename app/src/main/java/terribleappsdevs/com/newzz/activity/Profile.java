@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.CircularPropagation;
 import android.util.DisplayMetrics;
@@ -14,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.akexorcist.localizationactivity.ui.LocalizationActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -32,7 +32,7 @@ import terribleappsdevs.com.newzz.material.MainActivity;
  * Created by yogeshtripathi on 3/2/18.
  */
 
-public class Profile extends LocalizationActivity {
+public class Profile extends AppCompatActivity {
     @BindView(R.id.name)
     TextView nametv;
     @BindView(R.id.email)
@@ -46,14 +46,14 @@ public class Profile extends LocalizationActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_profile);
-        ButterKnife.bind(this);
+       // ButterKnife.bind(this);
 
-        getdatafrompref();
+       // getdatafrompref();
 
         btn_switch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setLanguage(Locale.CHINA);
+               // setLanguage(Locale.CHINA);
 
 
             }
@@ -61,7 +61,7 @@ public class Profile extends LocalizationActivity {
 
     }
 
-    private void getdatafrompref() {
+   /* private void getdatafrompref() {
         SharedPreferences data= getSharedPreferences("logindata",MODE_PRIVATE);
         if (data!=null) {
          String email,name,pic;
@@ -74,6 +74,6 @@ public class Profile extends LocalizationActivity {
             Glide.with(this).load(pic).apply(RequestOptions.circleCropTransform()).into(picimgview);
 
 
-        }
+        }*/
     }
-}
+

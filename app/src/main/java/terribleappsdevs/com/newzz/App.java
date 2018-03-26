@@ -7,17 +7,13 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.multidex.MultiDex;
 
-import com.akexorcist.localizationactivity.core.LocalizationApplicationDelegate;
 
 
 public class App extends Application {
-    LocalizationApplicationDelegate localizationDelegate = new LocalizationApplicationDelegate(this);
 
 
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(localizationDelegate.attachBaseContext(base));
-      //  MultiDex.install(this);
     }
 
     @Override
@@ -25,17 +21,10 @@ public class App extends Application {
         super.onCreate();
        // NightOwl.builder().defaultMode(0).create();
 
+        MultiDex.install(this);
 
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        localizationDelegate.onConfigurationChanged(this);
-    }
 
-    @Override
-    public Context getApplicationContext() {
-        return localizationDelegate.getApplicationContext(super.getApplicationContext());
-    }
+
 }

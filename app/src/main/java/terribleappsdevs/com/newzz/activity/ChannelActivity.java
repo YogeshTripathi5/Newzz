@@ -51,7 +51,7 @@ import terribleappsdevs.com.newzz.Interface.IconBetterIdeaService;
 import terribleappsdevs.com.newzz.Interface.NewsService;
 import terribleappsdevs.com.newzz.Login.CoreLoginScreen;
 import terribleappsdevs.com.newzz.R;
-import terribleappsdevs.com.newzz.Util;
+import terribleappsdevs.com.newzz.utils.Util;
 import terribleappsdevs.com.newzz.model.Website;
 
 public class ChannelActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {

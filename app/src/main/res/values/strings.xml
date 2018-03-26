@@ -29,5 +29,6 @@
     <string name="nigt">NightMode</string>
     <string name="lan">Language</string>
 
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
 </resources>

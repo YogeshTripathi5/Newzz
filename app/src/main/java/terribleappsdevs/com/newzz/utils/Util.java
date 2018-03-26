@@ -1,4 +1,4 @@
-package terribleappsdevs.com.newzz;
+package terribleappsdevs.com.newzz.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

@@ -85,7 +85,7 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 break;
             case R.id.nav_fav:
 
-                setAppTheme(R.style.AppThemeDark);
+                //setAppTheme(R.style.AppThemeDark);
                 break;
 
         }

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "12964057292-an805ql72ojimpa4ibteqf0556pr182t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "terribleappsdevs.com.newzz",
+            "certificate_hash": "72d8a5abdd6a260fb1fcd5b5f76137420d13e13b"
+          }
+        },
+        {
           "client_id": "12964057292-87rpe4rg2v8dabhm5q95igro0l8fvfhi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
