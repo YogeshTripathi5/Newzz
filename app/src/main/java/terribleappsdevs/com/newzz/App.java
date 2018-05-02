@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.multidex.MultiDex;
 
+import terribleappsdevs.com.newzz.utils.TypefaceUtil;
 
 
 public class App extends Application {
@@ -20,7 +21,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
        // NightOwl.builder().defaultMode(0).create();
-
+        TypefaceUtil.overrideFont(getApplicationContext(), "serif", "fonts/roboto_regular.ttf"); // font from assets: "assets/fonts/Roboto-Regular.ttf
         MultiDex.install(this);
 
     }

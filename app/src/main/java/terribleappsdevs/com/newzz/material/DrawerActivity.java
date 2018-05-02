@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import terribleappsdevs.com.newzz.R;
+import terribleappsdevs.com.newzz.activity.About;
 import terribleappsdevs.com.newzz.activity.ChannelActivity;
 import terribleappsdevs.com.newzz.activity.Profile;
 import terribleappsdevs.com.newzz.activity.SearchAny;
@@ -85,6 +86,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
                 break;
             case R.id.nav_fav:
 
+                //setAppTheme(R.style.AppThemeDark);
+                break;
+    case R.id.navigation_sub_item_1:
+                startActivity(new Intent(DrawerActivity.this, About.class));
                 //setAppTheme(R.style.AppThemeDark);
                 break;
 

@@ -45,9 +45,10 @@ public class Source {
     private String language;
     private String counrty;
     private UrlsToLogos urlsToLogos;
-    private List<String> sortBysAvailable;
+
     private String logoUrl;
     private boolean isLiked=false;
+
 
     public boolean getLiked() {
         return isLiked;
@@ -69,7 +70,6 @@ public class Source {
         this.language = language;
         this.counrty = counrty;
         this.urlsToLogos = urlsToLogos;
-        this.sortBysAvailable = sortBysAvailable;
     }
 
 
@@ -137,13 +137,7 @@ public class Source {
         this.urlsToLogos = urlsToLogos;
     }
 
-    public List<String> getSortBysAvailable() {
-        return sortBysAvailable;
-    }
 
-    public void setSortBysAvailable(List<String> sortBysAvailable) {
-        this.sortBysAvailable = sortBysAvailable;
-    }
 
     public String getLogoUrl() {
         return logoUrl;

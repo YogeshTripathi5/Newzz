@@ -1,5 +1,7 @@
 package terribleappsdevs.com.newzz.Login;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,10 +30,12 @@ import com.google.firebase.auth.FirebaseUser;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import terribleappsdevs.com.newzz.activity.Category;
 import terribleappsdevs.com.newzz.R;
+import terribleappsdevs.com.newzz.service.AlarmReceiver;
 
 /**
  * Created by admin1 on 8/10/17.
@@ -63,7 +67,7 @@ public class CoreLoginScreen extends AppCompatActivity  {
 
 
 
-
+        setAlarm();
 
         if (getSharedPreferences("logindata",MODE_PRIVATE).getString("name","")!=null && !getSharedPreferences("logindata",MODE_PRIVATE).getString("name","").isEmpty())
         {
@@ -95,6 +99,26 @@ public class CoreLoginScreen extends AppCompatActivity  {
 
 
 
+
+    }
+
+    public void setAlarm() {
+        Intent myIntent = new Intent(CoreLoginScreen.this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(CoreLoginScreen.this, 0, myIntent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        Calendar firingCal = Calendar.getInstance();
+
+
+        firingCal.set(Calendar.HOUR, 17); // At the hour you wanna fire
+        firingCal.set(Calendar.MINUTE, 53); // Particular minute
+        firingCal.set(Calendar.SECOND, 0); // particular second
+
+        long intendedTime = firingCal.getTimeInMillis();
+
+        // you can add buffer time too here to ignore some small differences in milliseconds
+        // set from today
+        alarmManager.setRepeating(AlarmManager.RTC, intendedTime, AlarmManager.INTERVAL_DAY, pendingIntent);
 
     }
 

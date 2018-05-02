@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -18,6 +19,8 @@ import com.cleveroad.slidingtutorial.TutorialFragment;
 import com.cleveroad.slidingtutorial.TutorialOptions;
 import com.cleveroad.slidingtutorial.TutorialPageOptionsProvider;
 
+import java.util.TimeZone;
+
 import terribleappsdevs.com.newzz.Login.CoreLoginScreen;
 import terribleappsdevs.com.newzz.R;
 import terribleappsdevs.com.newzz.material.MainActivity;
@@ -31,7 +34,7 @@ public class SliderActivity extends Activity implements View.OnClickListener {
     private static final int TOTAL_PAGES = 3;
     private static final int ACTUAL_PAGES_COUNT = 3;
     private int[] mPagesColors;
-
+    private boolean firstime = false;
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
     }
@@ -40,6 +43,9 @@ public class SliderActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.slider);
+
+        firstime = true;
+
         findViewById(R.id.bRetry).setOnClickListener(this);
         mPagesColors = new int[]{
                 ContextCompat.getColor(this, android.R.color.holo_blue_dark),
@@ -56,6 +62,7 @@ public class SliderActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bRetry:
+if (!firstime)
                 replaceTutorialFragment();
                 break;
         }
@@ -73,6 +80,7 @@ public class SliderActivity extends Activity implements View.OnClickListener {
                 .setTutorialPageProvider(new TutorialPagesProvider())
                 .setOnSkipClickListener(new OnSkipClickListener(this))
                 .build();
+
         final TutorialFragment tutorialFragment = TutorialFragment.newInstance(tutorialOptions);
         getFragmentManager()
                 .beginTransaction()
@@ -129,7 +137,6 @@ public class SliderActivity extends Activity implements View.OnClickListener {
                             TransformItem.create(R.id.ivSeventhImage, Direction.LEFT_TO_RIGHT, 0.14f),
                             TransformItem.create(R.id.ivEighthImage, Direction.LEFT_TO_RIGHT, 0.07f)
 
-
                     };
                     break;
                 }
@@ -155,9 +162,10 @@ public class SliderActivity extends Activity implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(mContext, "Skip button clicked", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(mContext, "Skip button clicked", Toast.LENGTH_SHORT).show();
 
             mContext.startActivity(new Intent(SliderActivity.this,CoreLoginScreen.class));
+            finish();
 
         }
     }

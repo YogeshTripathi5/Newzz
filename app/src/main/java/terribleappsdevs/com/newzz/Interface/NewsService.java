@@ -3,6 +3,7 @@ package terribleappsdevs.com.newzz.Interface;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Url;
+import terribleappsdevs.com.newzz.Common.Common;
 import terribleappsdevs.com.newzz.model.Article;
 import terribleappsdevs.com.newzz.model.News;
 import terribleappsdevs.com.newzz.model.Website;
@@ -12,7 +13,7 @@ import terribleappsdevs.com.newzz.model.Website;
  */
 
 public interface NewsService {
-    @GET("v1/sources?language=en")
+    @GET("v2/sources?language=en&apiKey="+ Common.API_KEY)
     Call<Website> getReources();
 
 

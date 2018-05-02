@@ -11,12 +11,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import com.google.gson.Gson;
 import com.yuyakaido.android.cardstackview.CardStackView;
 import com.yuyakaido.android.cardstackview.SwipeDirection;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.paperdb.Paper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,7 +28,6 @@ import terribleappsdevs.com.newzz.Interface.NewsService;
 import terribleappsdevs.com.newzz.R;
 import terribleappsdevs.com.newzz.model.Article;
 import terribleappsdevs.com.newzz.model.News;
-import terribleappsdevs.com.newzz.model.TouristSpot;
 
 /**
  * Created by yogeshtripathi on 4/3/18.
@@ -39,6 +40,8 @@ public class SearchAny extends Activity implements TextWatcher {
     private EditText search_view;
     private NewsService mNewsService;
     List<Article> articles;
+    List<Article> offlinearticles;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,8 @@ public class SearchAny extends Activity implements TextWatcher {
         search_view = findViewById(R.id.search_view);
         search_view.addTextChangedListener(this);
         mNewsService = Common.getNewsService();
+        offlinearticles = new ArrayList<>();
+        Paper.init(this);
         setup();
        // setup();
        // reload();
@@ -96,6 +101,20 @@ public class SearchAny extends Activity implements TextWatcher {
                 cardStackView.setAdapter(adapter);
                 cardStackView.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
+
+
+
+                adapter.setOnitemClickListener(new TouristSpotCardAdapter.OnitemClickListener() {
+                    @Override
+                    public void click(Article url) {
+                        offlinearticles.add(url);
+
+                        Paper.book().write("urls",offlinearticles);
+
+
+
+                    }
+                });
             }
         }, 1000);
     }

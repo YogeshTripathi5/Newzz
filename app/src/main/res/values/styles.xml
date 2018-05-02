@@ -11,6 +11,13 @@
 
 
     </style>
+
+
+    <style name="MyActionButtonOverflow" parent="android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_more_vert_white_36dp</item>
+    </style>
+
+
 <style name="AppThemeDark" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimaryNight</item>
@@ -18,7 +25,11 @@
         <item name="colorAccent">@color/colorAccentNight</item>
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
-
+    <item name="android:typeface">serif</item>
+    <item name="android:actionOverflowButtonStyle">@style/MyActionButtonOverflow</item>
+<!--
+    <item name="android:textColorSecondary">@color/white</item>
+-->
 
     </style>
 

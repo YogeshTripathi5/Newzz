@@ -88,7 +88,7 @@ public class Category extends AppCompatActivity implements View.OnClickListener 
         picker.setListener(new BubblePickerListener() {
             @Override
             public void onBubbleSelected(@NotNull PickerItem item) {
-                Toast.makeText(Category.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(Category.this, item.getTitle(), Toast.LENGTH_SHORT).show();
 
 
                 switch (item.getTitle().toLowerCase()) {
@@ -204,7 +204,7 @@ public class Category extends AppCompatActivity implements View.OnClickListener 
 
         TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
         countryCode  = tm.getSimCountryIso();
-        Toast.makeText(getApplicationContext(),countryCode,Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getApplicationContext(),countryCode,Toast.LENGTH_SHORT).show();
 
     }
 
@@ -242,6 +242,7 @@ public class Category extends AppCompatActivity implements View.OnClickListener 
                         editor.commit();
 
                         startActivity(intent);
+                        finish();
 
                         //Collections.sort(selected, String.CASE_INSENSITIVE_ORDER);
 

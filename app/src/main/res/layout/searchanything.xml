@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff">
+    android:background="@drawable/gradientbackground">
 
 
      <EditText
+
         android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_20"
-        android:background="@drawable/border"
+        android:background="@drawable/shapeoval"
+         android:textColorHint="@color/white"
         android:backgroundTint="@android:color/darker_gray"
         android:drawableLeft="@drawable/ic_action_action_search"
-        android:drawablePadding="@dimen/margin_20"
+        android:drawablePadding="@dimen/margin_10"
         android:hint="@string/Anything"
-        android:padding="@dimen/margin_16dp"
+        android:padding="@dimen/margin_10dp"
 
         />
-
 
 
 
@@ -36,7 +38,7 @@
         app:leftOverlay="@layout/overlay_left"
         app:rightOverlay="@layout/overlay_right"
         app:scaleDiff="0.02"
-        app:stackFrom="bottom"
+        app:stackFrom="top"
         app:swipeDirection="freedom_no_bottom"
         app:swipeEnabled="true"
         app:swipeThreshold="0.75"
@@ -49,5 +51,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
+    <TextView
+        android:layout_below="@id/activity_main_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type In Your Qwerry:)"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_16"
+        android:fontFamily="serif-monospace"
+        android:textColor="@color/white"
+
+        />
 
 </RelativeLayout>

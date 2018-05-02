@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "terribleappsdevs.com.newzz"
         minSdkVersion 17
@@ -22,8 +22,8 @@ android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompi
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation 'com.android.support:appcompat-v7:26.0.0'
@@ -42,7 +42,7 @@ dependencies {
     implementation 'com.github.florent37:diagonallayout:1.0.7'
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
     implementation 'com.google.android.gms:play-services-auth:11.8.0'
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
     implementation 'com.firebaseui:firebase-ui-auth:3.2.2'
     // implementation 'org.apache.httpcomponents:httpclient:4.5.5'
     implementation files('libs/httpclient-4.5.5.jar')
@@ -62,6 +62,8 @@ dependencies {
     implementation project(':materialviewpager')
     implementation 'com.google.firebase:firebase-messaging:11.8.0'
     implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
+    implementation 'com.github.bumptech.glide:glide:4.0.0'
+
 
 }
 apply plugin: 'com.google.gms.google-services'

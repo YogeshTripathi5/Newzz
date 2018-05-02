@@ -27,12 +27,12 @@ public class Common {
 
 //https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey=8bc18e4d02b6428683117e94543cd467
 
-    public static  String getApiUrl(String source,String sortBy,String apikey){
+    public static  String getApiUrl(String source, String sortBy, int page, String apikey){
 
-        StringBuilder apiUrl = new StringBuilder("https://newsapi.org/v1/articles?source=");
+        StringBuilder apiUrl = new StringBuilder("https://newsapi.org/v2/top-headlines?sources=");
         return apiUrl.append(source)
-                .append("&sortBy")
-                .append(sortBy)
+                .append("&page=")
+                .append(page)
                 .append("&apiKey=")
                 .append(apikey)
                 .toString();

@@ -3,6 +3,7 @@ package terribleappsdevs.com.newzz.activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,6 +39,7 @@ public class ListNews extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     DiagonalLayout diagonalLayout;
+    int page = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +71,7 @@ public class ListNews extends AppCompatActivity {
 
 
 
+
         diagonalLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,8 +91,8 @@ public class ListNews extends AppCompatActivity {
         {
 
             source = getIntent().getStringExtra("source");
-            sortBy = getIntent().getStringExtra("sortBy");
-            if (!source.isEmpty() && !sortBy.isEmpty())
+
+            if (!source.isEmpty())
             {
 
                 loadNews(source,false);
@@ -103,7 +106,7 @@ public class ListNews extends AppCompatActivity {
         {
 
             dialog.show();
-            mNewsService.getNewestArticles(Common.getApiUrl(source,sortBy,Common.API_KEY))
+            mNewsService.getNewestArticles(Common.getApiUrl(source,sortBy,page,Common.API_KEY))
                     .enqueue(new Callback<News>() {
                         @Override
                         public void onResponse(Call<News> call, Response<News> response) {
@@ -141,7 +144,7 @@ public class ListNews extends AppCompatActivity {
         }
         else {
             dialog.show();
-            mNewsService.getNewestArticles(Common.getApiUrl(source,sortBy,Common.API_KEY))
+            mNewsService.getNewestArticles(Common.getApiUrl(source,sortBy, page, Common.API_KEY))
                     .enqueue(new Callback<News>() {
                         @Override
                         public void onResponse(Call<News> call, Response<News> response) {

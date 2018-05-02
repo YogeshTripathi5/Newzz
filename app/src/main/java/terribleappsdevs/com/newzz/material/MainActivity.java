@@ -7,8 +7,12 @@ import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.google.gson.Gson;
@@ -31,13 +35,19 @@ public class MainActivity extends DrawerActivity {
     @BindView(R.id.materialViewPager)
     MaterialViewPager mViewPager;
     ArrayList<SelectedCategory> obj;
+  //  private ImageView img;
+ //   private TextView username,mailid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("");
+   /*     img = findViewById(R.id.img);
+        username = findViewById(R.id.username);
+        mailid = findViewById(R.id.mailid);
+   */     setTitle("");
         ButterKnife.bind(this);
+     //   getdatafrompref();
 
 
         SharedPreferences preferences = getSharedPreferences("categorydata", MODE_PRIVATE);
@@ -52,6 +62,8 @@ public class MainActivity extends DrawerActivity {
 
             obj = getIntent().getParcelableArrayListExtra("categoryselected");
         }
+
+
      // obj.getEntertainment();
 
 
@@ -117,15 +129,24 @@ public class MainActivity extends DrawerActivity {
         mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
         mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
         mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
-     /*   final View logo = findViewById(R.id.logo_white);
-        if (logo != null) {
-            logo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mViewPager.notifyHeaderChanged();
-                    Toast.makeText(getApplicationContext(), "Yes, the title is clickable", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }*/
+
+    }
+
+
+    private void getdatafrompref() {
+        SharedPreferences data = getSharedPreferences("logindata", MODE_PRIVATE);
+        if (data != null) {
+            String email, name, pic;
+            email = data.getString("email", "x");
+            name = data.getString("name", "x");
+            pic = data.getString("pic", "x");
+
+           // username.setText(name);
+            //mailid.setText(email);
+            //Glide.with(this).load(pic).apply(RequestOptions.circleCropTransform()).into(img);
+
+
+        }
     }
 }
+

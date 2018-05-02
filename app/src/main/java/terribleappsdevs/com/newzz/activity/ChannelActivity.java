@@ -18,7 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.Toast;
+
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -39,6 +39,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
 import io.paperdb.Paper;
@@ -51,6 +52,7 @@ import terribleappsdevs.com.newzz.Interface.IconBetterIdeaService;
 import terribleappsdevs.com.newzz.Interface.NewsService;
 import terribleappsdevs.com.newzz.Login.CoreLoginScreen;
 import terribleappsdevs.com.newzz.R;
+import terribleappsdevs.com.newzz.model.Source;
 import terribleappsdevs.com.newzz.utils.Util;
 import terribleappsdevs.com.newzz.model.Website;
 
@@ -76,7 +78,7 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
     Toolbar toolbar;
     MaterialSearchView materialSearchView;
     SharedPreferences.Editor editor;
-
+    String fromprofile ;
     MenuItem listitem,griditem;
     public ChannelActivity()
     {
@@ -88,6 +90,9 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.channel_main);
+
+
+        fromprofile =  getIntent().getStringExtra("fromprofilefav");
 
         //init cache
         Paper.init(this);
@@ -102,7 +107,6 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
             @Override
             public boolean onQueryTextSubmit(String query) {
 
-                Toast.makeText(getApplicationContext(), "onQueryTextSubmit", Toast.LENGTH_SHORT).show();
 
                 //Do some magic
                 return true;
@@ -112,7 +116,6 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
             public boolean onQueryTextChange(String source) {
                 //Do some magic
 
-                Toast.makeText(getApplicationContext(), "onQueryTextChange", Toast.LENGTH_SHORT).show();
                 if (listSourceAdapter != null)
                     listSourceAdapter.setFilter(source);
 
@@ -210,7 +213,6 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
 
 
                 {
-                    Toast.makeText(getApplicationContext(), "Item 1 Selected", Toast.LENGTH_LONG).show();
                     layoutManager = new LinearLayoutManager(this);
                     listWebsite.setLayoutManager(layoutManager);
                     list = true;
@@ -236,7 +238,6 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
                     editor.putBoolean("grid",grid );
                     editor.putBoolean("list",list);
                     editor.apply();
-                    Toast.makeText(getApplicationContext(), "Item 2 Selected", Toast.LENGTH_LONG).show();
 
                 }
                 if (listitem.getTitle().toString().equalsIgnoreCase("list")) {
@@ -252,7 +253,6 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
 
                  case R.id.Logout:
                 signOut();
-                Toast.makeText(getApplicationContext(), "Item 3 Selected", Toast.LENGTH_LONG).show();
                 return true;
 
               default:
@@ -273,9 +273,39 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
 
     boolean check = Util.checkInternetConnection(getBaseContext());
     if (check) {
-
         cache = Paper.book().read("cache");
-        if (cache != null && !cache.isEmpty()) {
+
+        if (fromprofile!=null&&fromprofile.equals("true")) {
+
+            cache = Paper.book().read("cache");
+            ArrayList<Source> likedchannel = new ArrayList<>();
+            if (cache != null && !cache.isEmpty() && !cache.equals("null")) {
+
+
+                try {
+                    Website website = new Gson().fromJson(cache, Website.class); //Convert cache from json to obj
+                    ArrayList<Source> sources = website.getSources();
+
+                    for (int i = 0; i < sources.size(); i++) {
+                        boolean liked = sources.get(i).getLiked();
+                        if (liked == true) {
+                            likedchannel.add(sources.get(i));
+                        }
+
+                    }
+                    listSourceAdapter = new ListSourceAdapter(getBaseContext(), likedchannel, list, grid);
+                    listSourceAdapter.notifyDataSetChanged();
+                    listWebsite.setAdapter(listSourceAdapter);
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+
+       else if (cache != null && !cache.isEmpty()) {
 
 
             try {
@@ -288,11 +318,13 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
 
                 listSourceAdapter.setOnLikeItemClick(new ListSourceAdapter.OnLikeItemClick() {
                     @Override
-                    public void click(int position) {
+                    public void click(int position, String id) {
 
                         website.getSources().get(position).setLiked(!website.getSources().get(position).getLiked());
                         Paper.book().write("cache", new Gson().toJson(website));
                         listSourceAdapter.notifyDataSetChanged();
+
+
 
                     }
                 });
@@ -305,7 +337,7 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
 
         } else {
 
-            alertDialog.show();
+           // alertDialog.show();
             //fetch
             newsService.getReources().enqueue(new Callback<Website>() {
                 @Override
@@ -392,7 +424,6 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
             }
         });
 
-        Toast.makeText(getBaseContext(),"no net.png",Toast.LENGTH_SHORT).show();
 
     }
         }
@@ -431,7 +462,7 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
 
     }
 
-    @Override
+    /*@Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
@@ -439,7 +470,7 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
 
         new Handler().postDelayed(new Runnable() {
 
@@ -448,7 +479,7 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
                 doubleBackToExitPressedOnce=false;
             }
         }, 2000);
-    }
+    }*/
 
     int size=0;
     public class MyAsyncTask extends android.os.AsyncTask<String,Void,String>

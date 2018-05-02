@@ -52,12 +52,9 @@
 
     <ImageView
         android:id="@+id/ivFourthImage"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:src="@drawable/symbolshare"
-
         app:layout_heightPercent="7%"
         app:layout_marginLeftPercent="33%"
         app:layout_marginTopPercent="34%"
@@ -65,12 +62,9 @@
 
     <ImageView
         android:id="@+id/ivSixthImage"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:src="@drawable/heart"
-
         app:layout_heightPercent="7%"
         app:layout_marginLeftPercent="57%"
         app:layout_marginTopPercent="29%"
@@ -78,12 +72,9 @@
 
     <ImageView
         android:id="@+id/ivSeventhImage"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:src="@drawable/prof"
-
         app:layout_heightPercent="15%"
         app:layout_marginLeftPercent="65%"
         app:layout_marginTopPercent="47%"
@@ -91,16 +82,23 @@
 
     <ImageView
         android:id="@+id/ivFifthImage"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:src="@drawable/not"
-
         app:layout_heightPercent="10%"
         app:layout_marginLeftPercent="77%"
         app:layout_marginTopPercent="30%"
         app:layout_widthPercent="15%"/>
+
+ <ImageView
+        android:id="@+id/ivsixthImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/tree"
+        app:layout_heightPercent="20%"
+        app:layout_marginLeftPercent="10%"
+        app:layout_marginTopPercent="40%"
+        app:layout_widthPercent="25%"/>
 
     <TextView
         android:layout_width="wrap_content"

@@ -110,35 +110,4 @@ public class RecyclerViewFragment extends Fragment {
 
 
 
-
-
-
-
-
-/*    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
-
-       *//* final List<Object> items = new ArrayList<>();
-
-        for (int i = 0; i < ITEM_COUNT; ++i) {
-            items.add(new Object());
-        }
-
-*//*
-        //setup materialviewpager
-
-        if (GRID_LAYOUT) {
-            mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        } else {
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        }
-        mRecyclerView.setHasFixedSize(true);
-
-        //Use this now
-        mRecyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
-        mRecyclerView.setAdapter(new TestRecyclerViewAdapter(articles,getContext()));
-    }*/
-
 }

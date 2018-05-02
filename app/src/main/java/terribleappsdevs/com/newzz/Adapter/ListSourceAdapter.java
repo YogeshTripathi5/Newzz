@@ -3,7 +3,6 @@ package terribleappsdevs.com.newzz.Adapter;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import com.like.LikeButton;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -106,7 +104,7 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
     public interface OnLikeItemClick
     {
 
-        void click(int position);
+        void click(int position, String id);
     }
 
     public void setOnLikeItemClick(final OnLikeItemClick onLikeItemClick ){
@@ -139,9 +137,9 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
     public void onBindViewHolder(final ListSourceViewHolder holder, final int position) {
 
 
-            if (holder.grid_card!=null) {
+            /*if (holder.grid_card!=null) {
                 holder.likebutton.setTag(sources.get(position));
-            }
+            }*/
             if (holder.card!=null) {
                 holder.likebutton.setTag(sources.get(position));
             }
@@ -167,7 +165,7 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
             public void onClick(View view, int pos, boolean isLongClick) {
                 Intent intent = new Intent(context,ListNews.class);
                 intent.putExtra("source",sources.get(position).getId());
-                intent.putExtra("sortBy",sources.get(position).getSortBysAvailable().get(0)); //get default sortby method
+             //   intent.putExtra("sortBy",sources.get(position).getSortBysAvailable().get(0)); //get default sortby method
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
@@ -198,10 +196,12 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
 
 
 
-              /*      source = (Source) v.getTag();*/
+                    source = (Source) v.getTag();
+                        String id =    source.getId();
+
+                    onLikeItemClick.click(position,id);
 
 
-                    onLikeItemClick.click(position);
 
 
                    /* source.setLiked(true);
