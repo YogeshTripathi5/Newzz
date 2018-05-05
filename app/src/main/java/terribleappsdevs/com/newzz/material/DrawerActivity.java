@@ -1,6 +1,7 @@
 package terribleappsdevs.com.newzz.material;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +13,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.auth.FirebaseAuth;
+
+import terribleappsdevs.com.newzz.Login.CoreLoginScreen;
 import terribleappsdevs.com.newzz.R;
 import terribleappsdevs.com.newzz.activity.About;
 import terribleappsdevs.com.newzz.activity.ChannelActivity;
@@ -28,11 +37,22 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     private DrawerLayout mDrawer;
     private ActionBarDrawerToggle mDrawerToggle;
     private NavigationView nav_view;
+    private FirebaseAuth mAuth;
+    private ImageView img;
+    private TextView username,mailid;
 
-      @Override
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+       // getdatafrompref();
 
 
     }
@@ -45,7 +65,10 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, 0, 0);
         mDrawer.setDrawerListener(mDrawerToggle);
         nav_view = findViewById(R.id.nav_view);
+
+
         nav_view.setNavigationItemSelectedListener(this);
+        mAuth = FirebaseAuth.getInstance();
 
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -55,6 +78,15 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
             actionBar.setDisplayUseLogoEnabled(false);
             actionBar.setHomeButtonEnabled(true);
         }
+
+        View view = getLayoutInflater().inflate(R.layout.nav_header, nav_view, true);
+
+        img = view.findViewById(R.id.img);
+        mailid = view.findViewById(R.id.mailid);
+        username= view.findViewById(R.id.username);
+
+        getdatafrompref();
+
     }
 
     @Override
@@ -84,8 +116,8 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
     case R.id.nav_channels:
                 startActivity(new Intent(DrawerActivity.this,ChannelActivity.class));
                 break;
-            case R.id.nav_fav:
-
+            case R.id.logout:
+                signOut();
                 //setAppTheme(R.style.AppThemeDark);
                 break;
     case R.id.navigation_sub_item_1:
@@ -98,8 +130,46 @@ public class DrawerActivity extends AppCompatActivity implements NavigationView.
         mDrawer.closeDrawers();
         return true;
     }
+    private void signOut() {
 
-    private void setAppTheme(@StyleRes int style) {
-        setTheme(style);
+        if (mAuth!=null) {
+            mAuth.signOut();
+            //FirebaseAuth.getInstance().signOut();
+            //LoginManager.getInstance().logOut();
+
+            // Google sign out
+
+            SharedPreferences.Editor editor = getSharedPreferences("logindata",MODE_PRIVATE).edit();
+            if (editor!=null) {
+                editor.clear();
+                editor.apply();
+
+            }
+            finish();
+
+            startActivity(new Intent(this,CoreLoginScreen.class));
+
+
+
+        }
+    }
+
+    private void getdatafrompref() {
+        SharedPreferences data = getSharedPreferences("logindata", MODE_PRIVATE);
+        if (data != null) {
+            String email, name, pic;
+            email = data.getString("email", "x");
+            name = data.getString("name", "x");
+            pic = data.getString("pic", "x");
+        if (username!=null)
+            username.setText(name);
+            if (mailid!=null)
+                mailid.setText(email);
+            if (img!=null)
+                Glide.with(this).load(pic).apply(RequestOptions.circleCropTransform()).into(img);
+
+
+        }
+
     }
 }

@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="@string/lorem"
             android:layout_centerInParent="true"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:fontFamily="serif-monospace"
             android:textColor="@color/white"

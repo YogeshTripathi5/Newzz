@@ -114,7 +114,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingTop="10dp"
-                            android:text="125"
+                            android:text=""
                             android:textColor="@color/startblue"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -126,7 +126,7 @@
             </android.support.v7.widget.CardView>
         </RelativeLayout>
 
-        <View
+      <!--  <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="45dp"
@@ -253,18 +253,62 @@
                 android:background="@color/black" />
 
 
-        </LinearLayout>
+        </LinearLayout>-->
 
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="35dp"
-            android:background="@drawable/buttonstyle"
-            android:src="@mipmap/ic_launcher"
-            android:text="Save"
-            android:textStyle="bold"
-            android:textColor="#fff" />
+
+        <RelativeLayout
+            android:padding="@dimen/margin_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.yugansh.tyagi.smileyrating.SmileyRatingView
+                android:id="@+id/smiley_view"
+                android:layout_width="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_height="400dp"
+                app:default_rating="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/smiley_view"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:text="Rate your Experience"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+
+            <RatingBar
+                android:id="@+id/rating_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/smiley_view"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="70dp"
+                android:numStars="4"
+                android:rating="1"
+                android:stepSize="1"
+            />
+
+            <EditText
+                android:id="@+id/review_box"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@id/rating_bar"
+                android:layout_margin="24dp"
+                android:hint="Write your Review"
+                android:padding="12dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/review_box"
+                android:layout_margin="24dp"
+                android:text="Submit"
+                android:elevation="4dp"
+                android:background="@color/colorPrimary"/>
+        </RelativeLayout>
+
 
     </LinearLayout>
 </ScrollView>

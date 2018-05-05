@@ -9,12 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
+import com.yugansh.tyagi.smileyrating.SmileyRatingView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +44,6 @@ public class Profile extends AppCompatActivity {
     TextView offlinenumber;
     @BindView(R.id.pic)
     ImageView picimgview;
-    @BindView(R.id.btn_switch)
-    Switch btn_switch;
     ArrayList<String>likedchannel = new ArrayList<>();
     ArrayList<Article>articleArrayList = new ArrayList<>();
     @BindView(R.id.fav_ch_ids)
@@ -57,17 +57,24 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_profile);
 
-        Typeface typeface = Typeface.createFromAsset(getAssets(),"R.font.Roboto_Regular");
-        //textView.setTypeface(typeface);
+        final SmileyRatingView smileyRatingView = findViewById(R.id.smiley_view);
+      RatingBar  ratingBar = findViewById(R.id.rating_bar);
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                smileyRatingView.setSmiley(rating);
+            }
+        });
 
         ButterKnife.bind(this);
         Paper.init(this);
+        articleArrayList = Paper.book().read("urls");
+        offlinenumber.setText(String.valueOf(articleArrayList.size()));
+
         offlinereading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                articleArrayList = Paper.book().read("urls");
-                offlinenumber.setText(articleArrayList.size());
 
                 //articleArrayList =  new Gson().fromJson(cache, ArrayList.class); //Convert cache from json to obj
 

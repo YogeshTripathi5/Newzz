@@ -2,7 +2,37 @@
     <string name="app_name">Newzz</string>
     <string name="title_activity_list_news">ListNews</string>
     <string name="signout">LogOut</string>
-    <string name="lorem">it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sit</string>
+    <string name="lorem">Newzz provides news from the leading news channels all around the world.\nNewzz provides all the relevant informations in a precise manner.\nNewzz provide data on basis of country,categories,trending.\n\n
+
+Categores include:\n\n
+*business\n
+*general\n
+*health\n
+*science\n
+*sports\n
+*technology\n
+*entertainment\n\n
+
+
+Newzz FEATURES\n\n
+*Opt categories u r interested in\n
+*Filter news on basis of categories\n
+*get notifications of Breaking News\n
+*photos of events, celebrities and \n happenings from around the world\n
+*Share news over social media\n
+*Read news offline\n
+*Customized profile\n
+*Search articles \n
+*Mark channels as favourite\n\n
+
+
+Credits to…\n
+
+newsapi.org\n
+
+https://newsapi.org/
+
+</string>
     <string name="con">Continue</string>
     <string name="sel">SelectAll</string>
     <string name="three_cat">Select Desired Category</string>
@@ -18,7 +48,7 @@
     <string name="home">Home</string>
     <string name="profile">My Profile</string>
     <string name="feed">FeedBack</string>
-    <string name="about">About</string>
+    <string name="about">About Us</string>
     <string name="nav_home">Home</string>
     <string name="nav_settings">Settings</string>
     <string name="searchany">Search Anything...</string>
@@ -30,5 +60,7 @@
     <string name="lan">Language</string>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="logout">Logout</string>
+    <string name="rateus">Rate Us</string>
 
 </resources>
