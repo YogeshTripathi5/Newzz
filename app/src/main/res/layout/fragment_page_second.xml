@@ -116,6 +116,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_regular"
 
         android:gravity="center"
 

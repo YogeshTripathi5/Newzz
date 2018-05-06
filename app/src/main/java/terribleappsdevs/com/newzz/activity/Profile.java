@@ -4,17 +4,29 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.yugansh.tyagi.smileyrating.SmileyRatingView;
 
@@ -51,24 +63,44 @@ public class Profile extends AppCompatActivity {
     @BindView(R.id.offlinereading)
     LinearLayout offlinereading;
     private String cache;
-
+    @BindView(R.id.review_box)
+    EditText review_box;
+@BindView(R.id.submit)
+Button submit;
+FirebaseAuth  firebaseAuth;
+String ratings="0";
+CardView rl;
+private int clicked = 0;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_profile);
-
+        firebaseAuth = FirebaseAuth.getInstance();
         final SmileyRatingView smileyRatingView = findViewById(R.id.smiley_view);
       RatingBar  ratingBar = findViewById(R.id.rating_bar);
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 smileyRatingView.setSmiley(rating);
+
+                ratings = String.valueOf(rating);
+
             }
         });
 
         ButterKnife.bind(this);
         Paper.init(this);
+
+
+         rl = (CardView) findViewById(R.id.rl);
+        String clc = Paper.book().read("click");
+        if (clc!=null)
+            if (clc.equals("1"))
+            {
+                rl.setVisibility(View.GONE);
+            }
         articleArrayList = Paper.book().read("urls");
+        if (articleArrayList!=null && articleArrayList.size()>0)
         offlinenumber.setText(String.valueOf(articleArrayList.size()));
 
         offlinereading.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +134,44 @@ public class Profile extends AppCompatActivity {
 
             }
         });
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+              String data = review_box.getText().toString();
+
+              if (data!=null&&!data.isEmpty())
+              {
+                  // Write a message to the database
+                  FirebaseDatabase database = FirebaseDatabase.getInstance();
+                  DatabaseReference myRef = database.getReference("user");
+                  //myRef.setValue(firebaseAuth.getCurrentUser().getEmail());
+
+                DatabaseReference databaseReference =  myRef.child("id");
+                  databaseReference.setValue(firebaseAuth.getCurrentUser().getEmail());
+                  DatabaseReference  databaseReference2 = myRef.child("message");
+                    databaseReference2.setValue(data);
+        DatabaseReference  databaseReference3 = myRef.child("ratings");
+                    databaseReference3.setValue(ratings);
+
+
+              }
+
+                Snackbar.make(v,"Thank You For Your Valuable Feedback",Snackbar.LENGTH_SHORT).show();
+                rl.animate().translationY(rl.getHeight())
+                        .alpha(0.0f)
+                        .setDuration(2000);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        rl.setVisibility(View.GONE);
+                    }
+                },3000);
+
+                clicked = 1;
+                Paper.book().write("click",String.valueOf(clicked));
+            }
+        });
     }
 
     private void getdatafromcache() {

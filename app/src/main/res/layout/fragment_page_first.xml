@@ -122,7 +122,8 @@
         android:layout_centerHorizontal="true"
 
         android:gravity="center"
-
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_regular"
         android:text="@string/search_cat"
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_size_large"

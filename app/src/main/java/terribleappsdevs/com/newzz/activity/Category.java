@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -51,6 +52,8 @@ public class Category extends AppCompatActivity implements View.OnClickListener 
     BubblePicker picker;
 
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -58,6 +61,19 @@ public class Category extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bubble);
         ButterKnife.bind(this);
+
+
+
+     /* SharedPreferences da =  getSharedPreferences("categorydata",MODE_PRIVATE);
+
+        {
+
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("countrycode",countryCode);
+            intent.putParcelableArrayListExtra("categoryselected",selectedCategories);
+            startActivity(intent);
+            finish();
+        }*/
 
         picker = findViewById(R.id.picker);
         final String[] titles = getResources().getStringArray(R.array.category);
@@ -213,6 +229,10 @@ public class Category extends AppCompatActivity implements View.OnClickListener 
     protected void onResume() {
         super.onResume();
         picker.onResume();
+
+
+
+
     }
 
     @Override

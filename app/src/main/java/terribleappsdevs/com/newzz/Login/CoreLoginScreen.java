@@ -74,6 +74,7 @@ public class CoreLoginScreen extends AppCompatActivity  {
 
 
             startActivity(new Intent(this,MainActivity.class));overridePendingTransition(0,0);finish();
+            finish();
         }
         else
         {
@@ -122,7 +123,8 @@ public class CoreLoginScreen extends AppCompatActivity  {
 
     }
 
-    private void setupui() {
+    private void
+    setupui() {
 
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());

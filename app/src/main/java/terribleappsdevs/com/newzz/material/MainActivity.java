@@ -42,12 +42,22 @@ public class MainActivity extends DrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+      //  PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+
+
    /*     img = findViewById(R.id.img);
         username = findViewById(R.id.username);
         mailid = findViewById(R.id.mailid);
    */     setTitle("");
         ButterKnife.bind(this);
      //   getdatafrompref();
+
+
+
+
+
+
 
 
         SharedPreferences preferences = getSharedPreferences("categorydata", MODE_PRIVATE);
@@ -64,25 +74,6 @@ public class MainActivity extends DrawerActivity {
         }
 
 
-     // obj.getEntertainment();
-
-
- /*      SharedPreferences data= getSharedPreferences("category",MODE_PRIVATE);
-        if (data!=null) {
-            Set<String> strings = new HashSet<>();
-            strings = data.getStringSet("set", strings);
-
-           // Category.selected.add(strings);
-           // strings.addAll(Category.selected);
-
-            Set<String> setTemp = new HashSet<>();
-            setTemp.addAll(strings);
-         //   List<List<String>> list = new ArrayList<List<String>> ();
-            for (String subset : setTemp) {
-                Category.selected.add(subset);
-            }
-        }
-*/
         final Toolbar toolbar = mViewPager.getToolbar();
         if (toolbar != null) {
             setSupportActionBar(toolbar);
@@ -126,27 +117,13 @@ public class MainActivity extends DrawerActivity {
             }
         });
 
-        mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
-       /// mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
+       mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
         mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
 
     }
 
 
-    private void getdatafrompref() {
-        SharedPreferences data = getSharedPreferences("logindata", MODE_PRIVATE);
-        if (data != null) {
-            String email, name, pic;
-            email = data.getString("email", "x");
-            name = data.getString("name", "x");
-            pic = data.getString("pic", "x");
-
-           // username.setText(name);
-            //mailid.setText(email);
-            //Glide.with(this).load(pic).apply(RequestOptions.circleCropTransform()).into(img);
 
 
-        }
-    }
 }
 

@@ -16,8 +16,8 @@ Categores include:\n\n
 
 Newzz FEATURES\n\n
 *Opt categories u r interested in\n
-*Filter news on basis of categories\n
-*get notifications of Breaking News\n
+*Filter on basis of categories\n
+*get notified on Breaking News\n
 *photos of events, celebrities and \n happenings from around the world\n
 *Share news over social media\n
 *Read news offline\n
@@ -41,7 +41,7 @@ https://newsapi.org/
     <string name="text_web_dev">WEB DEVELOPER</string>
     <string name="text_e_commerce">e-Commerce</string>
     <string name="chan">Channels</string>
-    <string name="fav_chan">Favourite</string>
+    <string name="fav_chan">Favourite Channels</string>
     <string name="search_cat">Filter By Categories</string>
     <string name="socialmedia">Social Media</string>
     <string name="email">xyz@gmail.com</string>
@@ -62,5 +62,7 @@ https://newsapi.org/
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="logout">Logout</string>
     <string name="rateus">Rate Us</string>
+    <string name="share">Share</string>
+    <string name="pref_previously_started">prev</string>
 
 </resources>

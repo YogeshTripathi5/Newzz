@@ -109,6 +109,9 @@
         android:text="@string/socialmedia"
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_size_large"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_regular"
+
         app:layout_heightPercent="15%"
         app:layout_marginBottomPercent="11%"
         app:layout_widthPercent="45%"/>
