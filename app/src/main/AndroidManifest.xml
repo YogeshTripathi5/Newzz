@@ -10,15 +10,42 @@
         android:hardwareAccelerated="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
+        android:name=".App"
         android:theme="@style/AppThemeDark.NoActionBar">
 
         <activity android:name=".activity.SliderActivity"
+            android:launchMode="singleTop"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- Branch URI scheme -->
+            <intent-filter>
+                <data android:scheme="newzz" android:host="open" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <!-- Branch App Links -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="kevt.app.link" />
+            </intent-filter>
+
+
+            <!-- Branch init -->
+            <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_lhDXe23wyL035TEnneD0KppdwAdv5ryi" />
+            <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_ckrWp29AAQ32YRClbjYodddnrxgBZDFF" />
+
+            <!-- Branch testing (TestMode "true" to simulate fresh installs on dev environment) -->
+            <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
+            <!-- Branch install referrer tracking -->
+
         </activity>
         <activity
             android:name=".activity.ListNews"
@@ -50,6 +77,17 @@
         </service>
 
         <receiver android:name=".service.AlarmReceiver"/>
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="fdd610cccc7b0018e465d2ecf193959d96dd949d" />
+
+        <receiver android:name="io.branch.referral.InstallListener" android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
 
     </application>
 

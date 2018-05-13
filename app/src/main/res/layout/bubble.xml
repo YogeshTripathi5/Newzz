@@ -16,7 +16,8 @@
         android:fontFamily="serif"
         android:gravity="center"
         android:text="@string/con"
-        android:textColor="@color/black"
+
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
     <FrameLayout

@@ -111,8 +111,8 @@ public class CoreLoginScreen extends AppCompatActivity  {
         Calendar firingCal = Calendar.getInstance();
 
 
-        firingCal.set(Calendar.HOUR, 17); // At the hour you wanna fire
-        firingCal.set(Calendar.MINUTE, 53); // Particular minute
+        firingCal.set(Calendar.HOUR, 8); // At the hour you wanna fire
+        firingCal.set(Calendar.MINUTE, 10); // Particular minute
         firingCal.set(Calendar.SECOND, 0); // particular second
 
         long intendedTime = firingCal.getTimeInMillis();

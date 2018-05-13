@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -54,6 +55,15 @@ public class SearchAny extends Activity implements TextWatcher {
         setup();
        // setup();
        // reload();
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+
     }
 
     private void setup() {
@@ -107,6 +117,11 @@ public class SearchAny extends Activity implements TextWatcher {
                 adapter.setOnitemClickListener(new TouristSpotCardAdapter.OnitemClickListener() {
                     @Override
                     public void click(Article url) {
+                        offlinearticles.add(url);
+                        Snackbar.make(cardStackView,"Saved to Offline Reading...",Snackbar.LENGTH_SHORT).show();
+
+                        offlinearticles = Paper.book().read("urls");
+                        if (offlinearticles!=null)
                         offlinearticles.add(url);
 
                         Paper.book().write("urls",offlinearticles);

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -34,6 +35,7 @@ import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dmax.dialog.SpotsDialog;
 import terribleappsdevs.com.newzz.R;
 import terribleappsdevs.com.newzz.material.MainActivity;
 import terribleappsdevs.com.newzz.model.SelectedCategory;
@@ -52,6 +54,8 @@ public class Category extends AppCompatActivity implements View.OnClickListener 
     BubblePicker picker;
 
 
+    SpotsDialog alertDialog;
+
 
 
     @Override
@@ -61,6 +65,16 @@ public class Category extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bubble);
         ButterKnife.bind(this);
+
+        alertDialog = new SpotsDialog(this);
+alertDialog.show();
+
+new Handler().postDelayed(new Runnable() {
+    @Override
+    public void run() {
+        alertDialog.hide();
+    }
+},7000);
 
 
 

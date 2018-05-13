@@ -5,6 +5,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+
+<FrameLayout
+    android:id="@+id/frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/empty"
+    >
+
+    <TextView
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="55dp"
+        android:textSize="@dimen/text_size_24"
+        android:inputType="textPersonName"
+        android:text="NO Data Found"
+        android:textStyle="bold"
+        android:fontFamily="@font/roboto_regular"
+        />
+</FrameLayout>
+
+
 <android.support.v7.widget.RecyclerView
     android:id="@+id/offlinerv"
     app:spanCount="2"

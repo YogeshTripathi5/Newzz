@@ -7,25 +7,34 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.multidex.MultiDex;
 
+import io.branch.referral.Branch;
 import terribleappsdevs.com.newzz.utils.TypefaceUtil;
 
 
-public class App extends Application {
-
-
-    @Override
-    protected void attachBaseContext(Context base) {
-    }
+public class App  extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
-       // NightOwl.builder().defaultMode(0).create();
-        TypefaceUtil.overrideFont(getApplicationContext(), "serif", "fonts/roboto_regular.ttf"); // font from assets: "assets/fonts/Roboto-Regular.ttf
-        MultiDex.install(this);
+
+
+
+        // initialize the AdMob app
+       // MobileAds.initialize(this, getString(R.string.admob_app_id));
+// Branch logging for debugging
+        Branch.enableLogging();
+
+        // Branch object initialization
+        Branch.getAutoInstance(this);
+
 
     }
 
-
-
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 }
+
+

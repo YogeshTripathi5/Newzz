@@ -215,22 +215,36 @@
             app:cardUseCompatPadding="true"
             >
             <LinearLayout
-                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:padding="@dimen/margin_10"
                 >
+
+
                 <LinearLayout
-                    android:padding="@dimen/margin_10"
-                    android:background="@color/colorPrimary"
-                    android:layout_width="match_parent"
+                    android:id="@+id/rateusbutton"
+                    android:background="@color/white"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+
+
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/profile_image"
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
                         android:src="@drawable/ic_grade_white_48dp"
-                        />
+                        app:civ_border_width="2dp"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/margin_10"
+                        app:civ_circle_background_color="@color/colorPrimary"
+                        app:civ_border_color="#fff"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -239,35 +253,47 @@
                         android:textStyle="bold"
                         android:gravity="center"
                         android:fontFamily="@font/roboto_regular"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
                         />
+
                 </LinearLayout>
 
-
                 <LinearLayout
-                    android:padding="@dimen/margin_10"
-                    android:background="@color/colorPrimary"
-                    android:layout_marginTop="@dimen/margin_20"
-                    android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="match_parent"
+                    android:id="@+id/sharebutton"
+                    android:background="@color/white"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_share_white_48dp"
-                    />
+                    android:orientation="vertical">
+
+
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        android:src="@drawable/ic_share_white_48dp"
+                        android:padding="@dimen/margin_10"
+                        app:civ_border_width="2dp"
+                        android:layout_gravity="center"
+                        app:civ_circle_background_color="@color/colorPrimary"
+                        app:civ_border_color="#fff"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/share"
                         android:textSize="@dimen/text_size_16"
-                        android:gravity="center"
                         android:textStyle="bold"
+                        android:gravity="center"
                         android:fontFamily="@font/roboto_regular"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
                         />
 
                 </LinearLayout>
+
 
 
             </LinearLayout>

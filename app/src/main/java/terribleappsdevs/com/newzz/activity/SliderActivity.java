@@ -10,17 +10,28 @@ import android.preference.PreferenceManager;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.cleveroad.slidingtutorial.Direction;
 import com.cleveroad.slidingtutorial.IndicatorOptions;
+import com.cleveroad.slidingtutorial.OnTutorialPageChangeListener;
 import com.cleveroad.slidingtutorial.PageOptions;
 import com.cleveroad.slidingtutorial.TransformItem;
 import com.cleveroad.slidingtutorial.TutorialFragment;
 import com.cleveroad.slidingtutorial.TutorialOptions;
 import com.cleveroad.slidingtutorial.TutorialPageOptionsProvider;
 
+import com.cleveroad.slidingtutorial.TutorialSupportFragment;
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.ndk.CrashlyticsNdk;
+
+import org.json.JSONObject;
+
+import io.branch.referral.Branch;
+import io.branch.referral.BranchError;
+import io.fabric.sdk.android.Fabric;
 import java.util.TimeZone;
 
 import terribleappsdevs.com.newzz.Login.CoreLoginScreen;
@@ -31,7 +42,7 @@ import terribleappsdevs.com.newzz.material.MainActivity;
  * Created by yogeshtripathi on 18/2/18.
  */
 
-public class SliderActivity extends Activity implements View.OnClickListener {
+public class SliderActivity extends Activity implements View.OnClickListener,OnTutorialPageChangeListener {
 
     private static final int TOTAL_PAGES = 3;
     private static final int ACTUAL_PAGES_COUNT = 3;
@@ -39,6 +50,32 @@ public class SliderActivity extends Activity implements View.OnClickListener {
     private boolean firstime = false;
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Branch branch = Branch.getInstance();
+
+        // Branch init
+        branch.initSession(new Branch.BranchReferralInitListener() {
+            @Override
+            public void onInitFinished(JSONObject referringParams, BranchError error) {
+                if (error == null) {
+                    // params are the deep linked params associated with the link that the user clicked -> was re-directed to this app
+                    // params will be empty if no data found
+                    // ... insert custom logic here ...
+                    Log.i("BRANCH SDK", referringParams.toString());
+                } else {
+                    Log.i("BRANCH SDK", error.getMessage());
+                }
+            }
+        }, this.getIntent().getData(), this);
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        this.setIntent(intent);
     }
 
     @Override
@@ -59,6 +96,7 @@ public class SliderActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
         setContentView(R.layout.slider);
 
 
@@ -78,7 +116,7 @@ public class SliderActivity extends Activity implements View.OnClickListener {
 
         firstime = true;
 
-        findViewById(R.id.bRetry).setOnClickListener(this);
+        //findViewById(R.id.bRetry).setOnClickListener(this);
         mPagesColors = new int[]{
                 ContextCompat.getColor(this, android.R.color.holo_blue_dark),
                 ContextCompat.getColor(this, android.R.color.holo_orange_dark),
@@ -93,10 +131,10 @@ public class SliderActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bRetry:
-if (!firstime)
+            /*case R.id.bRetry:
+                if (!firstime)
                 replaceTutorialFragment();
-                break;
+                break;*/
         }
     }
 
@@ -105,9 +143,11 @@ if (!firstime)
                 .build();
         final TutorialOptions tutorialOptions = TutorialFragment.newTutorialOptionsBuilder(this)
                 .setUseAutoRemoveTutorialFragment(true)
-                .setUseInfiniteScroll(true)
+                .setUseInfiniteScroll(false)
                 .setPagesColors(mPagesColors)
                 .setPagesCount(TOTAL_PAGES)
+                .setUseAutoRemoveTutorialFragment(true)
+
                 .setIndicatorOptions(indicatorOptions)
                 .setTutorialPageProvider(new TutorialPagesProvider())
                 .setOnSkipClickListener(new OnSkipClickListener(this))
@@ -118,6 +158,20 @@ if (!firstime)
                 .beginTransaction()
                 .replace(R.id.container, tutorialFragment)
                 .commit();
+tutorialFragment.addOnTutorialPageChangeListener(this);
+
+
+    }
+
+
+    @Override
+    public void onPageChanged(int position) {
+        //Log.i(TAG, "onPageChanged: position = " + position);
+        if (position == TutorialSupportFragment.EMPTY_FRAGMENT_POSITION) {
+            startActivity(new Intent(this,CoreLoginScreen.class));
+            finish();
+        }
+
     }
 
 
@@ -179,6 +233,7 @@ if (!firstime)
 
             return PageOptions.create(pageLayoutResId, position, tutorialItems);
         }
+
     }
 
 
