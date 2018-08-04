@@ -27,7 +27,7 @@ public class TouristSpotCardAdapter extends ArrayAdapter<Article> {
         this.onitemClickListener = onitemClickListener;
     }
     public interface OnitemClickListener{
-        void click(Article url);
+        void click(Article url, String fav);
     }
 
     @Override
@@ -46,16 +46,28 @@ public class TouristSpotCardAdapter extends ArrayAdapter<Article> {
 
         Article spot = getItem(position);
         holder.fav.setTag(getItem(position));
+        holder.share.setTag(getItem(position));
         holder.name.setText(spot.getTitle());
         holder.city.setText(spot.getDescription());
         holder.author.setText(spot.getAuthor());
+        holder.share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Article spot= (Article) v.getTag();
+               // String url = spot.getUrl();
+                onitemClickListener.click(spot, "share");
+
+            }
+        });
+
         holder.fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                  Article spot= (Article) v.getTag();
-                 String url = spot.getUrl();
-                onitemClickListener.click(spot);
+                // String url = spot.getUrl();
+                onitemClickListener.click(spot,"fav");
             }
         });
 
@@ -71,7 +83,7 @@ public class TouristSpotCardAdapter extends ArrayAdapter<Article> {
     private static class ViewHolder {
         public TextView name,author;
         public TextView city;
-        public ImageView image,fav;
+        public ImageView image,fav,share;
 
         public ViewHolder(View view) {
             this.name = (TextView) view.findViewById(R.id.item_tourist_spot_card_name);
@@ -79,6 +91,7 @@ public class TouristSpotCardAdapter extends ArrayAdapter<Article> {
             this.city = (TextView) view.findViewById(R.id.item_tourist_spot_card_city);
             this.image = (ImageView) view.findViewById(R.id.item_tourist_spot_card_image);
             this.fav = (ImageView) view.findViewById(R.id.fav);
+            this.share = (ImageView) view.findViewById(R.id.share);
         }
     }
 

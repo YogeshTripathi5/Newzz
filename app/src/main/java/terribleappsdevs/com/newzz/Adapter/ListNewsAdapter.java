@@ -2,6 +2,8 @@ package terribleappsdevs.com.newzz.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -110,10 +112,16 @@ public class ListNewsAdapter extends RecyclerView.Adapter<ListNewsViewHolder>{
        @Override
        public void onClick(View view, int pos, boolean isLongClick) {
 
+
+           CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+           CustomTabsIntent customTabsIntent = builder.build();
+           customTabsIntent.launchUrl(context, Uri.parse(articleList.get(pos).getUrl()));
+
+/*
            Intent intent = new Intent(context,DetailActivity.class);
            intent.putExtra("webUrl",articleList.get(pos).getUrl());
            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-           context.startActivity(intent);
+           context.startActivity(intent);*/
 
        }
    });

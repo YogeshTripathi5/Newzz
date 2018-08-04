@@ -183,24 +183,16 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
             holder.likebutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*realm.beginTransaction();
-                    Favourite favourite = realm.createObject(Favourite.class);
-                    favourite.setWishlist(true);
-                    favourite.setPostion(position);
-                    holder.likebutton.setLiked(true);
-                    holder.likebutton.setAnimationScaleFactor(2);
-                    holder.likebutton.setEnabled(true);
-                    realm.commitTransaction();
-*/
 
 
 
 
                     source = (Source) v.getTag();
-                        String id =    source.getId();
+                    if (source.getId()!=null) {
+                        String id = source.getId();
 
-                    onLikeItemClick.click(position,id);
-
+                        onLikeItemClick.click(position, id);
+                    }
 
 
 

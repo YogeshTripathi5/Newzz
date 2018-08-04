@@ -3,6 +3,7 @@ package terribleappsdevs.com.newzz.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -33,6 +34,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.yugansh.tyagi.smileyrating.SmileyRatingView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -67,8 +70,8 @@ public class Profile extends AppCompatActivity {
     TextView offlinenumber;
     @BindView(R.id.pic)
     ImageView picimgview;
-    ArrayList<String>likedchannel = new ArrayList<>();
-    ArrayList<Article>articleArrayList = new ArrayList<>();
+    ArrayList<String> likedchannel = new ArrayList<>();
+    ArrayList<Article> articleArrayList = new ArrayList<>();
     @BindView(R.id.fav_ch_ids)
     LinearLayout fav_ch_ids;
     @BindView(R.id.rateusbutton)
@@ -80,12 +83,13 @@ public class Profile extends AppCompatActivity {
     private String cache;
     @BindView(R.id.review_box)
     EditText review_box;
-@BindView(R.id.submit)
-Button submit;
-FirebaseAuth  firebaseAuth;
-String ratings="0";
-CardView rl;
-private int clicked = 0;
+    @BindView(R.id.submit)
+    Button submit;
+    FirebaseAuth firebaseAuth;
+    String ratings = "0";
+    CardView rl;
+    private int clicked = 0;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,10 +97,10 @@ private int clicked = 0;
         ButterKnife.bind(this);
         Paper.init(this);
 
-
+        final Uri uri = Uri.parse("https://firebasestorage.googleapis.com/v0/b/newzz-83f86.appspot.com/o/ic_launcher_1.png?alt=media&token=2db4a628-0d2d-44f1-84a8-52b1b3106b90");
         firebaseAuth = FirebaseAuth.getInstance();
         final SmileyRatingView smileyRatingView = findViewById(R.id.smiley_view);
-      RatingBar  ratingBar = findViewById(R.id.rating_bar);
+        RatingBar ratingBar = findViewById(R.id.rating_bar);
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -122,16 +126,14 @@ private int clicked = 0;
             public void onClick(View v) {
 
 
-
-
                 BranchUniversalObject buo = new BranchUniversalObject()
                         .setCanonicalIdentifier("content/12345")
                         .setTitle("Newzz")
-                        .setContentDescription("Newzz provides news from the leading news channels all around the world.Newzz provides all the relevant informations in a precise manner.")
-                        .setContentImageUrl(String.valueOf(getResources().getDrawable(R.mipmap.ic_launcher)))
+                        .setContentDescription("Newzz provides news from the leading news channels all around the world")
+                        .setContentImageUrl(String.valueOf(uri))
                         .setContentIndexingMode(BranchUniversalObject.CONTENT_INDEX_MODE.PUBLIC)
                         .setLocalIndexMode(BranchUniversalObject.CONTENT_INDEX_MODE.PUBLIC)
-                        .setContentMetadata(new ContentMetadata().addCustomMetadata("newzz","newzz"));
+                        .setContentMetadata(new ContentMetadata().addCustomMetadata("imageUrl", String.valueOf(uri)));
 
 
 
@@ -152,7 +154,9 @@ private int clicked = 0;
                         }
                     }
                 });
-                ShareSheetStyle ss = new ShareSheetStyle(Profile.this, "Check this out!", "This stuff is awesome: ")
+
+
+                ShareSheetStyle ss = new ShareSheetStyle(Profile.this, "Check this out!", "Stay Updated With Current Affairs... ")
                         .setCopyUrlStyle(ContextCompat.getDrawable(Profile.this, android.R.drawable.ic_menu_send), "Copy", "Added to clipboard")
                         .setMoreOptionStyle(ContextCompat.getDrawable(Profile.this, android.R.drawable.ic_menu_search), "Show more")
                         .addPreferredSharingOption(SharingHelper.SHARE_WITH.FACEBOOK)
@@ -177,21 +181,19 @@ private int clicked = 0;
                     }
                 });
 
-
             }
         });
 
 
-         rl = (CardView) findViewById(R.id.rl);
+        rl = (CardView) findViewById(R.id.rl);
         String clc = Paper.book().read("click");
-        if (clc!=null)
-            if (clc.equals("1"))
-            {
+        if (clc != null)
+            if (clc.equals("1")) {
                 rl.setVisibility(View.GONE);
             }
         articleArrayList = Paper.book().read("urls");
-        if (articleArrayList!=null && articleArrayList.size()>0)
-        offlinenumber.setText(String.valueOf(articleArrayList.size()));
+        if (articleArrayList != null && articleArrayList.size() > 0)
+            offlinenumber.setText(String.valueOf(articleArrayList.size()));
 
         offlinereading.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,13 +202,12 @@ private int clicked = 0;
 
                 //articleArrayList =  new Gson().fromJson(cache, ArrayList.class); //Convert cache from json to obj
 
-               // articleArrayList.add(article);
+                // articleArrayList.add(article);
 
-                Intent intent = new Intent(Profile.this,OfflineReading.class);
+                Intent intent = new Intent(Profile.this, OfflineReading.class);
                 intent.putParcelableArrayListExtra("arraylist", articleArrayList);
                 startActivity(intent);
                 finish();
-
 
 
             }
@@ -217,9 +218,9 @@ private int clicked = 0;
         fav_ch_ids.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // setLanguage(Locale.CHINA);
-                Intent intent = new Intent(Profile.this,ChannelActivity.class);
-                intent.putExtra("fromprofilefav","true");
+                // setLanguage(Locale.CHINA);
+                Intent intent = new Intent(Profile.this, ChannelActivity.class);
+                intent.putExtra("fromprofilefav", "true");
                 startActivity(intent);
 
             }
@@ -228,75 +229,83 @@ private int clicked = 0;
             @Override
             public void onClick(View v) {
 
-              String data = review_box.getText().toString();
+                String data = review_box.getText().toString();
 
-              if (data!=null&&!data.isEmpty())
-              {
-                  // Write a message to the database
-                  FirebaseDatabase database = FirebaseDatabase.getInstance();
-                  DatabaseReference myRef = database.getReference("user");
-                  //myRef.setValue(firebaseAuth.getCurrentUser().getEmail());
+                if (data != null && !data.isEmpty()) {
+                    // Write a message to the database
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("user");
+                    //myRef.setValue(firebaseAuth.getCurrentUser().getEmail());
 
-                DatabaseReference databaseReference =  myRef.child("id");
-                  databaseReference.setValue(firebaseAuth.getCurrentUser().getEmail());
-                  DatabaseReference  databaseReference2 = myRef.child("message");
+                    DatabaseReference databaseReference = myRef.child("id");
+                    databaseReference.setValue(firebaseAuth.getCurrentUser().getEmail());
+                    DatabaseReference databaseReference2 = myRef.child("message");
                     databaseReference2.setValue(data);
-        DatabaseReference  databaseReference3 = myRef.child("ratings");
+                    DatabaseReference databaseReference3 = myRef.child("ratings");
                     databaseReference3.setValue(ratings);
 
 
-                  Snackbar.make(v,"Thank You For Your Valuable Feedback",Snackbar.LENGTH_SHORT).show();
-                  rl.animate().translationY(rl.getHeight())
-                          .alpha(0.0f)
-                          .setDuration(2000);
-                  new Handler().postDelayed(new Runnable() {
-                      @Override
-                      public void run() {
-                          rl.setVisibility(View.GONE);
-                      }
-                  },3000);
+                    Snackbar.make(v, "Thank You For Your Valuable Feedback", Snackbar.LENGTH_SHORT).show();
+                    rl.animate().translationY(rl.getHeight())
+                            .alpha(0.0f)
+                            .setDuration(2000);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            rl.setVisibility(View.GONE);
+                        }
+                    }, 3000);
 
-                  clicked = 1;
-                  Paper.book().write("click",String.valueOf(clicked));
-              }else
-              {
-                  Snackbar.make(v,"Please provide your Feedback",Snackbar.LENGTH_SHORT).show();
+                    clicked = 1;
+                    Paper.book().write("click", String.valueOf(clicked));
+                } else {
+                    Snackbar.make(v, "Please provide your Feedback", Snackbar.LENGTH_SHORT).show();
 
-              }
+                }
 
             }
         });
     }
 
+    public  void openShareIntent(String shareText) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+
+
+        Uri uri = Uri.parse(String.valueOf(R.mipmap.ic_launcher));
+        //  InputStream stream = getContentResolver().openInputStream(uri);
+        Uri imageUri = uri;
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_STREAM, imageUri);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.putExtra(Intent.EXTRA_TEXT, shareText);
+        startActivity(Intent.createChooser(intent, "Share Via:"));
+    }
+
     private void getdatafromcache() {
-       String cache = Paper.book().read("cache");
+        String cache = Paper.book().read("cache");
         if (cache != null && !cache.isEmpty()) {
 
 
             try {
-              Website  website = new Gson().fromJson(cache, Website.class); //Convert cache from json to obj
+                Website website = new Gson().fromJson(cache, Website.class); //Convert cache from json to obj
                 ArrayList<Source> sources = website.getSources();
 
-                for (int i = 0; i<sources.size();i++)
-                {
-                    boolean liked =sources.get(i).getLiked();
-                        if (liked==true)
-                        {
-                            likedchannel.add(sources.get(i).getName());
-                        }
+                for (int i = 0; i < sources.size(); i++) {
+                    boolean liked = sources.get(i).getLiked();
+                    if (liked == true) {
+                        likedchannel.add(sources.get(i).getName());
+                    }
 
                 }
 
 
-
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (likedchannel!=null)
+            if (likedchannel != null)
                 numberofchannels.setText(String.valueOf(likedchannel.size()));
-    }}
-
-
+        }
+    }
 
 
     private void getdatafrompref() {
@@ -314,5 +323,5 @@ private int clicked = 0;
 
         }
     }
-    }
+}
 

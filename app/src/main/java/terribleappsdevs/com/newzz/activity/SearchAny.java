@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -12,13 +13,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import com.google.gson.Gson;
 import com.yuyakaido.android.cardstackview.CardStackView;
 import com.yuyakaido.android.cardstackview.SwipeDirection;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import io.branch.indexing.BranchUniversalObject;
+import io.branch.referral.Branch;
+import io.branch.referral.BranchError;
+import io.branch.referral.SharingHelper;
+import io.branch.referral.util.ContentMetadata;
+import io.branch.referral.util.LinkProperties;
+import io.branch.referral.util.ShareSheetStyle;
 import io.paperdb.Paper;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -116,16 +124,78 @@ public class SearchAny extends Activity implements TextWatcher {
 
                 adapter.setOnitemClickListener(new TouristSpotCardAdapter.OnitemClickListener() {
                     @Override
-                    public void click(Article url) {
-                        offlinearticles.add(url);
-                        Snackbar.make(cardStackView,"Saved to Offline Reading...",Snackbar.LENGTH_SHORT).show();
+                    public void click(Article url, String fav) {
 
-                        offlinearticles = Paper.book().read("urls");
-                        if (offlinearticles!=null)
-                        offlinearticles.add(url);
+                        if (fav.equals("fav")){
+                            offlinearticles.add(url);
+                            Snackbar.make(cardStackView,"Saved to Offline Reading...",Snackbar.LENGTH_SHORT).show();
+                            if (Paper.book().read("urls")!=null)
+                                offlinearticles = Paper.book().read("urls");
+                            if (offlinearticles!=null)
+                                offlinearticles.add(url);
 
-                        Paper.book().write("urls",offlinearticles);
+                            Paper.book().write("urls",offlinearticles);
 
+
+                        }else {
+                            BranchUniversalObject buo = new BranchUniversalObject()
+                                    .setCanonicalIdentifier("content/12345")
+                                    .setTitle("Newzz")
+                                    .setContentDescription("Newzz provides news from the leading news channels all around the world")
+                                    .setContentImageUrl("https://firebasestorage.googleapis.com/v0/b/newzz-83f86.appspot.com/o/ic_launcher_1.png?alt=media&token=2db4a628-0d2d-44f1-84a8-52b1b3106b90")
+                                    //.setContentImageUrl(url.getUrl())
+                                    .setContentIndexingMode(BranchUniversalObject.CONTENT_INDEX_MODE.PUBLIC)
+                                    .setLocalIndexMode(BranchUniversalObject.CONTENT_INDEX_MODE.PUBLIC)
+                                    .setContentMetadata(new ContentMetadata().addCustomMetadata("imageUrl",url.getUrl() ));
+
+
+
+                            LinkProperties lp = new LinkProperties()
+                                    .setChannel("facebook")
+                                    .setFeature("sharing")
+                                    .setCampaign("content 123 launch")
+                                    .setStage("new user")
+                                    .addControlParameter("$desktop_url", "http://phototakenwith.com/")
+                                    .addControlParameter("custom", "data")
+                                    .addControlParameter("custom_random", Long.toString(Calendar.getInstance().getTimeInMillis()));
+
+                            buo.generateShortUrl(SearchAny.this, lp, new Branch.BranchLinkCreateListener() {
+                                @Override
+                                public void onLinkCreate(String url, BranchError error) {
+                                    if (error == null) {
+                                        Log.i("BRANCH SDK", "got my Branch link to share: " + url);
+                                    }
+                                }
+                            });
+
+
+                            ShareSheetStyle ss = new ShareSheetStyle(SearchAny.this, "Check this out!", "This stuff is awesome: ")
+                                    .setCopyUrlStyle(ContextCompat.getDrawable(SearchAny.this, android.R.drawable.ic_menu_send), "Copy", "Added to clipboard")
+                                    .setMoreOptionStyle(ContextCompat.getDrawable(SearchAny.this, android.R.drawable.ic_menu_search), "Show more")
+                                    .addPreferredSharingOption(SharingHelper.SHARE_WITH.FACEBOOK)
+                                    .addPreferredSharingOption(SharingHelper.SHARE_WITH.EMAIL)
+                                    .addPreferredSharingOption(SharingHelper.SHARE_WITH.MESSAGE)
+                                    .addPreferredSharingOption(SharingHelper.SHARE_WITH.HANGOUT)
+                                    .setAsFullWidthStyle(true)
+                                    .setSharingTitle("Share With");
+
+                            buo.showShareSheet(SearchAny.this, lp,  ss,  new Branch.BranchLinkShareListener() {
+                                @Override
+                                public void onShareLinkDialogLaunched() {
+                                }
+                                @Override
+                                public void onShareLinkDialogDismissed() {
+                                }
+                                @Override
+                                public void onLinkShareResponse(String sharedLink, String sharedChannel, BranchError error) {
+                                }
+                                @Override
+                                public void onChannelSelected(String channelName) {
+                                }
+                            });
+
+
+                        }
 
 
                     }

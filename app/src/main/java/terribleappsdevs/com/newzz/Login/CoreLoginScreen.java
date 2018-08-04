@@ -19,6 +19,8 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.ResultCodes;
 
+import io.branch.referral.Branch;
+import io.branch.referral.BranchError;
 import terribleappsdevs.com.newzz.activity.ChannelActivity;
 import terribleappsdevs.com.newzz.material.MainActivity;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -26,6 +28,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.json.JSONObject;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -58,6 +62,12 @@ public class CoreLoginScreen extends AppCompatActivity  {
 
        String na =  name;
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -111,15 +121,15 @@ public class CoreLoginScreen extends AppCompatActivity  {
         Calendar firingCal = Calendar.getInstance();
 
 
-        firingCal.set(Calendar.HOUR, 8); // At the hour you wanna fire
-        firingCal.set(Calendar.MINUTE, 10); // Particular minute
+        firingCal.set(Calendar.HOUR, 18); // At the hour you wanna fire
+        firingCal.set(Calendar.MINUTE, 30); // Particular minute
         firingCal.set(Calendar.SECOND, 0); // particular second
 
         long intendedTime = firingCal.getTimeInMillis();
 
         // you can add buffer time too here to ignore some small differences in milliseconds
         // set from today
-        alarmManager.setRepeating(AlarmManager.RTC, intendedTime, AlarmManager.INTERVAL_DAY, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, intendedTime, AlarmManager.INTERVAL_DAY, pendingIntent);
 
     }
 
@@ -127,12 +137,12 @@ public class CoreLoginScreen extends AppCompatActivity  {
     setupui() {
 
         List<AuthUI.IdpConfig> providers = Arrays.asList(
-                new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
+                new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),new AuthUI.IdpConfig.FacebookBuilder().build());
 // Create and launch sign-in intent
         startActivityForResult(
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
-                        .setLogo(R.mipmap.ic_launcher)
+                        .setLogo(R.mipmap.ic_launcher_1)
                         .setTheme(R.style.AppTheme)
                         .setAvailableProviders(providers)
                         .setIsSmartLockEnabled(false)

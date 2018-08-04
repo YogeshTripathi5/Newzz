@@ -5,8 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="white">#fff</color>
     <color name="black">#000</color>
-    <color name="accent">#000</color>
-    <color name="primary_dark">#FFF</color>
     <color name="startblue">#000</color>
 
 
@@ -23,14 +21,4 @@
 
 
     <color name="blue">#303F9F</color>
-    <color name="green">#4CAF50</color>
-    <color name="green_teal">#009688</color>
-    <color name="purple">#673AB7</color>
-    <color name="red">#F44336</color>
-    <color name="cyan">#00BCD4</color>
-    <color name="lime">#CDDC39</color>
-    <color name="accent_color">@color/blue</color>
-    <color name="statusBarColor">@color/blue</color>
-    <color name="navigationBarColor">@android:color/black</color>
-    <color name="drawerArrowColor">@android:color/white</color>
 </resources>

@@ -13,14 +13,35 @@
         android:name=".App"
         android:theme="@style/AppThemeDark.NoActionBar">
 
+
+
+
+
+
         <activity android:name=".activity.SliderActivity"
-            android:launchMode="singleTop"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
+        </activity>
+        <activity
+            android:name=".activity.ListNews"
+            android:label="@string/title_activity_list_news"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.DetailActivity"></activity>
+        <activity android:name=".activity.About"></activity>
+        <activity android:name=".activity.ChannelActivity"></activity>
+        <activity android:name=".activity.Profile"></activity>
+        <activity android:name=".activity.Category"></activity>
+        <activity android:name=".material.MainActivity"
+            android:launchMode="singleTask"
+
+            >
+
             <!-- Branch URI scheme -->
             <intent-filter>
                 <data android:scheme="newzz" android:host="open" />
@@ -38,26 +59,29 @@
             </intent-filter>
 
 
-            <!-- Branch init -->
-            <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_lhDXe23wyL035TEnneD0KppdwAdv5ryi" />
-            <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_ckrWp29AAQ32YRClbjYodddnrxgBZDFF" />
-
-            <!-- Branch testing (TestMode "true" to simulate fresh installs on dev environment) -->
-            <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
-            <!-- Branch install referrer tracking -->
-
         </activity>
-        <activity
-            android:name=".activity.ListNews"
-            android:label="@string/title_activity_list_news"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.DetailActivity"></activity>
-        <activity android:name=".activity.About"></activity>
-        <activity android:name=".activity.ChannelActivity"></activity>
-        <activity android:name=".activity.Profile"></activity>
-        <activity android:name=".activity.Category"></activity>
-        <activity android:name=".material.MainActivity"></activity>
-        <activity android:name=".Login.CoreLoginScreen"></activity>
+
+
+        <!-- Branch init -->
+        <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_lhDXe23wyL035TEnneD0KppdwAdv5ryi" />
+        <meta-data android:name="io.branch.sdk.BranchKey.test" android:value="key_test_ckrWp29AAQ32YRClbjYodddnrxgBZDFF" />
+
+        <!-- Branch testing (TestMode "true" to simulate fresh installs on dev environment) -->
+        <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
+
+
+
+        <!-- Branch install referrer tracking -->
+        <receiver android:name="io.branch.referral.InstallListener" android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+
+
+        <activity android:name=".Login.CoreLoginScreen"
+            ></activity>
         <activity android:name=".activity.SearchAny"></activity>
         <activity android:name=".activity.OfflineReading"></activity>
 
@@ -76,17 +100,17 @@
             </intent-filter>
         </service>
 
-        <receiver android:name=".service.AlarmReceiver"/>
+        <receiver android:name=".service.AlarmReceiver">
+
+        <intent-filter>
+            <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </receiver>
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="fdd610cccc7b0018e465d2ecf193959d96dd949d" />
-
-        <receiver android:name="io.branch.referral.InstallListener" android:exported="true">
-            <intent-filter>
-                <action android:name="com.android.vending.INSTALL_REFERRER" />
-            </intent-filter>
-        </receiver>
 
 
     </application>

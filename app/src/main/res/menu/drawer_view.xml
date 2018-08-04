@@ -35,7 +35,6 @@
             android:icon="@drawable/ic_info_white_36dp"
             android:title="@string/about" />
         <item
-            android:id="@+id/navigation_sub_item_2"
             android:icon="@drawable/ic_stars_white_36dp"
             android:title="@string/rateus" />
 
