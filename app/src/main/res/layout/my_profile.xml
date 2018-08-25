@@ -4,15 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@android:color/black"
+        android:clickable="true"
         android:orientation="vertical">
 
         <RelativeLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -21,8 +25,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/gradientbackground"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/margin_20"
-                >
+                android:paddingBottom="@dimen/margin_20">
 
                 <ImageView
                     android:id="@+id/pic"
@@ -38,18 +41,19 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
-                    android:text="Wiliam Snoe"
                     android:fontFamily="@font/roboto_regular"
+                    android:text="Wiliam Snoe"
                     android:textColor="#fff"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/roboto_regular"
                     android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="xyz@gmail.com"
                     android:textColor="#fff"
                     android:textSize="16sp"
@@ -58,21 +62,23 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="400dp"
-                app:cardElevation="@dimen/margin_5"
-                app:cardCornerRadius="@dimen/margin_5"
-                app:cardUseCompatPadding="true"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="225dp">
+                android:layout_marginTop="235dp"
+                app:cardCornerRadius="@dimen/margin_5"
+                app:cardElevation="@dimen/margin_5"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    >
 
                     <LinearLayout
                         android:id="@+id/fav_ch_ids"
+                        android:padding="@dimen/margin_5"
 
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -82,18 +88,18 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:gravity="center_vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/roboto_regular"
+                            android:gravity="center_vertical"
                             android:text="Favourite Channels"
                             android:textSize="18sp" />
 
                         <TextView
                             android:id="@+id/numberofchannels"
-                            android:fontFamily="@font/roboto_regular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
                             android:paddingTop="10dp"
                             android:text=""
                             android:textColor="@color/startblue"
@@ -112,18 +118,18 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:gravity="center_vertical"
                             android:layout_width="wrap_content"
-                            android:fontFamily="@font/roboto_regular"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:gravity="center_vertical"
                             android:text="Offline Reading"
                             android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/offlinenumber"
                             android:layout_width="wrap_content"
-                            android:fontFamily="@font/roboto_regular"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
                             android:paddingTop="10dp"
                             android:text=""
                             android:textColor="@color/startblue"
@@ -139,70 +145,71 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/rl"
-           android:animateLayoutChanges="true"
-                android:visibility="visible"
             android:layout_width="match_parent"
-            app:cardElevation="@dimen/margin_5"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:visibility="visible"
             app:cardCornerRadius="@dimen/margin_5"
-            app:cardUseCompatPadding="true"
-            android:layout_height="wrap_content">
+            app:cardElevation="@dimen/margin_5"
+            app:cardUseCompatPadding="true">
 
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.yugansh.tyagi.smileyrating.SmileyRatingView
-                android:id="@+id/smiley_view"
-                android:layout_width="match_parent"
-                android:layout_centerHorizontal="true"
-                android:layout_height="250dp"
-                app:default_rating="1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/smiley_view"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="@font/roboto_regular"
-                android:layout_marginTop="20dp"
-                android:text="Rate your Experience"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
-
-            <RatingBar
-                android:id="@+id/rating_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/smiley_view"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
-                android:numStars="4"
-                android:rating="1"
-                android:stepSize="1"
-            />
-
-            <EditText
-                android:id="@+id/review_box"
-                android:layout_width="match_parent"
-                android:fontFamily="@font/roboto_regular"
-                android:layout_height="60dp"
-                android:layout_below="@id/rating_bar"
-                android:layout_margin="14dp"
-                android:hint="Write your Review"
-                android:padding="12dp" />
-
-            <Button
-                android:id="@+id/submit"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/review_box"
-                android:layout_margin="14dp"
-                android:text="Submit"
-                android:elevation="4dp"
-                android:background="@color/colorPrimary"/>
-        </RelativeLayout>
+                android:background="@color/black">
+
+                <com.yugansh.tyagi.smileyrating.SmileyRatingView
+                    android:id="@+id/smiley_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    app:default_rating="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/smiley_view"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Rate your Experience"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <RatingBar
+                    android:id="@+id/rating_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/smiley_view"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"
+                    android:numStars="4"
+                    android:rating="1"
+                    android:stepSize="1" />
+
+                <EditText
+                    android:id="@+id/review_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@id/rating_bar"
+                    android:layout_margin="14dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="Write your Review"
+                    android:padding="12dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
+
+                <Button
+                    android:id="@+id/submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/review_box"
+                    android:layout_margin="14dp"
+                    android:background="@color/colorPrimary"
+                    android:elevation="4dp"
+                    android:text="Submit" />
+            </RelativeLayout>
 
         </android.support.v7.widget.CardView>
 
@@ -210,89 +217,83 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="@dimen/margin_5"
+            app:cardBackgroundColor="@color/black"
             app:cardCornerRadius="@dimen/margin_5"
-            app:cardUseCompatPadding="true"
-            >
+            app:cardElevation="@dimen/margin_5"
+            app:cardUseCompatPadding="true">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/black"
                 android:orientation="horizontal"
-                android:weightSum="2"
                 android:padding="@dimen/margin_10"
-                >
+                android:weightSum="2">
 
 
                 <LinearLayout
                     android:id="@+id/rateusbutton"
-                    android:background="@color/white"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/black"
                     android:orientation="vertical">
 
 
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/ic_grade_white_48dp"
-                        app:civ_border_width="2dp"
                         android:layout_gravity="center"
                         android:padding="@dimen/margin_10"
-                        app:civ_circle_background_color="@color/colorPrimary"
-                        app:civ_border_color="#fff"/>
+                        android:src="@drawable/ic_grade_white_48dp"
+                        app:civ_border_color="#fff"
+                        app:civ_border_width="2dp"
+                        app:civ_circle_background_color="@color/colorPrimary" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/rateus"
-                        android:textSize="@dimen/text_size_16"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:fontFamily="@font/roboto_regular"
-                        android:textColor="@color/black"
                         android:layout_gravity="center"
-                        />
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="center"
+                        android:text="@string/rateus"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_16"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/sharebutton"
-                    android:background="@color/white"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/black"
                     android:orientation="vertical">
 
 
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:src="@drawable/ic_share_white_48dp"
-                        android:padding="@dimen/margin_10"
-                        app:civ_border_width="2dp"
                         android:layout_gravity="center"
-                        app:civ_circle_background_color="@color/colorPrimary"
-                        app:civ_border_color="#fff"/>
+                        android:padding="@dimen/margin_10"
+                        android:src="@drawable/ic_share_white_48dp"
+                        app:civ_border_color="#fff"
+                        app:civ_border_width="2dp"
+                        app:civ_circle_background_color="@color/colorPrimary" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/share"
-                        android:textSize="@dimen/text_size_16"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:fontFamily="@font/roboto_regular"
-                        android:textColor="@color/black"
                         android:layout_gravity="center"
-                        />
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="center"
+                        android:text="@string/share"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_16"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
-
 
 
             </LinearLayout>

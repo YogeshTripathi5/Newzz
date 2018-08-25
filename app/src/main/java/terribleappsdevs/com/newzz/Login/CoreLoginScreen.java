@@ -66,6 +66,7 @@ public class CoreLoginScreen extends AppCompatActivity  {
     public void onStart() {
         super.onStart();
 
+
     }
 
 
@@ -114,27 +115,26 @@ public class CoreLoginScreen extends AppCompatActivity  {
     }
 
     public void setAlarm() {
-        Intent myIntent = new Intent(CoreLoginScreen.this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(CoreLoginScreen.this, 0, myIntent, 0);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
         Calendar firingCal = Calendar.getInstance();
 
 
-        firingCal.set(Calendar.HOUR, 18); // At the hour you wanna fire
-        firingCal.set(Calendar.MINUTE, 30); // Particular minute
+        firingCal.set(Calendar.HOUR, 2); // At the hour you wanna fire
+        firingCal.set(Calendar.MINUTE, 56); // Particular minute
         firingCal.set(Calendar.SECOND, 0); // particular second
 
         long intendedTime = firingCal.getTimeInMillis();
 
-        // you can add buffer time too here to ignore some small differences in milliseconds
-        // set from today
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, intendedTime, AlarmManager.INTERVAL_DAY, pendingIntent);
 
+        Intent _intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, _intent, 0);
+        AlarmManager alarmManager = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+        // Remove any previous pending intent.
+        alarmManager.cancel(pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, intendedTime , pendingIntent);
     }
 
-    private void
-    setupui() {
+    private void setupui() {
 
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),new AuthUI.IdpConfig.FacebookBuilder().build());

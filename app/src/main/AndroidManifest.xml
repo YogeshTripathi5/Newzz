@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:name=".App"
-        android:theme="@style/AppThemeDark.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar">
 
 
 
@@ -111,7 +111,6 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="fdd610cccc7b0018e465d2ecf193959d96dd949d" />
-
 
     </application>
 

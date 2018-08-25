@@ -29,6 +29,25 @@
         android:textStyle="bold"
         android:textSize="@dimen/text_size_24"
         android:layout_gravity="center"
+        android:id="@+id/logotx"
+
+        />
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/stay"
+        android:textAllCaps="true"
+
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_below="@id/logotx"
+        android:textStyle="italic"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="@dimen/text_size_16"
+        android:layout_gravity="center"
 
         />
 

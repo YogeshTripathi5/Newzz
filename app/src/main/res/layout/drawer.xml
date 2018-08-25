@@ -11,6 +11,8 @@
     app:menu="@menu/drawer_view"
     app:itemIconTint="@color/white"
     app:itemTextColor="@color/white"
+    app:itemBackground="@drawable/ripple_navigation_selector"
+
     >
 
 

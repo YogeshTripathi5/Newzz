@@ -1,5 +1,6 @@
 package terribleappsdevs.com.newzz.activity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -116,7 +117,7 @@ public class Profile extends AppCompatActivity {
         rateusbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+launchMarket();
             }
         });
 
@@ -164,7 +165,7 @@ public class Profile extends AppCompatActivity {
                         .addPreferredSharingOption(SharingHelper.SHARE_WITH.MESSAGE)
                         .addPreferredSharingOption(SharingHelper.SHARE_WITH.HANGOUT)
                         .setAsFullWidthStyle(true)
-                        .setSharingTitle("Share With");
+                        .setSharingTitle("Newzz");
 
                 buo.showShareSheet(Profile.this, lp,  ss,  new Branch.BranchLinkShareListener() {
                     @Override
@@ -263,8 +264,26 @@ public class Profile extends AppCompatActivity {
 
                 }
 
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        launchMarket();
+                    }
+                },3000);
+
             }
         });
+    }
+
+    private void launchMarket() {
+        Uri uri = Uri.parse("market://details?id=" + getPackageName());
+        Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        try {
+            startActivity(myAppLinkToMarket);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, " unable to find market app", Toast.LENGTH_LONG).show();
+        }
     }
 
     public  void openShareIntent(String shareText) {

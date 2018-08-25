@@ -8,7 +8,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 
+import terribleappsdevs.com.newzz.Login.CoreLoginScreen;
 import terribleappsdevs.com.newzz.R;
 import terribleappsdevs.com.newzz.material.MainActivity;
 
@@ -28,22 +30,16 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     public void createNotification(Context context) {
-        // Prepare intent which is triggered if the
-        // notification is selected
-        Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pIntent = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, 0);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "1")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("ds")
+                .setContentText("dsa")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
 
-        // Build notification
-        // Actions are just fake
-        Notification noti = new Notification.Builder(context)
-                .setContentTitle("Fresh Feeds")
-                .setContentText("New Newzz Feeds Added...").setSmallIcon(R.mipmap.ic_launcher)
-                .setContentIntent(pIntent).build();
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        // hide the notification after its selected
-        noti.flags |= Notification.FLAG_AUTO_CANCEL;
+// notificationId is a unique int for each notification that you must define
+        notificationManager.notify(Integer.parseInt("1"), mBuilder.build());
 
-        notificationManager.notify(0, noti);
 
     }
 }
