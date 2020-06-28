@@ -5,14 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+
 import android.view.View;
-import android.widget.Toast;
 
 import com.cleveroad.slidingtutorial.Direction;
 import com.cleveroad.slidingtutorial.IndicatorOptions;
@@ -27,12 +25,7 @@ import com.cleveroad.slidingtutorial.TutorialSupportFragment;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
 
-import org.json.JSONObject;
-
-import io.branch.referral.Branch;
-import io.branch.referral.BranchError;
 import io.fabric.sdk.android.Fabric;
-import java.util.TimeZone;
 
 import terribleappsdevs.com.newzz.Login.CoreLoginScreen;
 import terribleappsdevs.com.newzz.R;
@@ -226,9 +219,13 @@ tutorialFragment.addOnTutorialPageChangeListener(this);
         @Override
         public void onClick(View v) {
           //  Toast.makeText(mContext, "Skip button clicked", Toast.LENGTH_SHORT).show();
-
-            mContext.startActivity(new Intent(SliderActivity.this,CoreLoginScreen.class));
-            finish();
+        Intent intent = new Intent(SliderActivity.this,CoreLoginScreen.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
+        finish();
+            //startActivity(new Intent(SliderActivity.this,CoreLoginScreen.class));
+            //
+            // finish();
 
         }
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -31,7 +31,7 @@
             app:circle_start_color="@color/colorPrimary"
             app:dots_primary_color="@color/colorAccent"
             app:dots_secondary_color="@color/colorPrimary"
-            app:icon_size="25dp"
+            app:icon_size="10dp"
             app:icon_type="Star"
             app:is_enabled="true"
             app:like_drawable="@drawable/heart_on"
@@ -72,4 +72,4 @@
 
     </RelativeLayout>
 
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

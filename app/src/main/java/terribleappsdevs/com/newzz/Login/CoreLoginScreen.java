@@ -9,19 +9,16 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
-import com.firebase.ui.auth.ResultCodes;
 
-import io.branch.referral.Branch;
-import io.branch.referral.BranchError;
-import terribleappsdevs.com.newzz.activity.ChannelActivity;
+
 import terribleappsdevs.com.newzz.material.MainActivity;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,10 +26,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import org.json.JSONObject;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -135,17 +131,15 @@ public class CoreLoginScreen extends AppCompatActivity  {
     }
 
     private void setupui() {
-
         List<AuthUI.IdpConfig> providers = Arrays.asList(
-                new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build(),new AuthUI.IdpConfig.FacebookBuilder().build());
-// Create and launch sign-in intent
+                new AuthUI.IdpConfig.GoogleBuilder().build(),
+                new AuthUI.IdpConfig.FacebookBuilder().build());
+
+        // Create and launch sign-in intent
         startActivityForResult(
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
-                        .setLogo(R.mipmap.ic_launcher_1)
-                        .setTheme(R.style.AppTheme)
                         .setAvailableProviders(providers)
-                        .setIsSmartLockEnabled(false)
                         .build(),
                 RC_SIGN_IN);
 
@@ -211,7 +205,7 @@ public class CoreLoginScreen extends AppCompatActivity  {
         if (requestCode == RC_SIGN_IN) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
 
-            if (resultCode == ResultCodes.OK) {
+            if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 user.getEmail();

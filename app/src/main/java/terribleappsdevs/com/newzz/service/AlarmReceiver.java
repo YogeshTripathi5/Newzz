@@ -1,18 +1,13 @@
 package terribleappsdevs.com.newzz.service;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 
-import terribleappsdevs.com.newzz.Login.CoreLoginScreen;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
 import terribleappsdevs.com.newzz.R;
-import terribleappsdevs.com.newzz.material.MainActivity;
 
 /**
  * Created by user on 4/18/2018.

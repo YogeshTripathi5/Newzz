@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/materialviewpager/materialviewpager.iml" filepath="$PROJECT_DIR$/materialviewpager/materialviewpager.iml" group="newz/materialviewpager" />
+      <module fileurl="file://$PROJECT_DIR$/newz.iml" filepath="$PROJECT_DIR$/newz.iml" group="newz" />
+      <module fileurl="file://$PROJECT_DIR$/app/newz-app.iml" filepath="$PROJECT_DIR$/app/newz-app.iml" group="newz/app" />
       <module fileurl="file://$PROJECT_DIR$/newzz.iml" filepath="$PROJECT_DIR$/newzz.iml" />
     </modules>
   </component>

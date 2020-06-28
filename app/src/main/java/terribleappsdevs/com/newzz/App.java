@@ -1,14 +1,10 @@
 package terribleappsdevs.com.newzz;
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.support.multidex.MultiDex;
+
+import androidx.multidex.MultiDex;
 
 import io.branch.referral.Branch;
-import terribleappsdevs.com.newzz.utils.TypefaceUtil;
 
 
 public class App  extends Application {

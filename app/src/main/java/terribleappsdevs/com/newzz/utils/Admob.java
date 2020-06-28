@@ -1,3 +1,4 @@
+/*
 package terribleappsdevs.com.newzz.utils;
 
 import android.app.Activity;
@@ -12,9 +13,11 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 
+*/
 /**
  * Created by yogeshtripathi on 24/1/18.
- */
+ *//*
+
 
 public class Admob {
     private static Activity context;
@@ -22,10 +25,12 @@ public class Admob {
     private InterstitialAd mInterstitialAd;
     private RewardedVideoAd mRewardedVideoAd;
 
-    /**
+    */
+/**
      * @param contextClass pass the activity context
      * @param AppId        pass the Admob App Id
-     */
+     *//*
+
     public static Admob getInstance(Activity contextClass, String AppId) {
         context = contextClass;
         MobileAds.initialize(contextClass, AppId);
@@ -37,11 +42,13 @@ public class Admob {
 
     }
 
-    /**
+    */
+/**
      * Custom method for loading banner ad...
      *
      * @param mAdView
-     */
+     *//*
+
     public void showAdmobBannerLoad(AdView mAdView) {
 
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -111,12 +118,14 @@ public class Admob {
 
     }
 
-    /**
+    */
+/**
      * Custom method to load interstitial  ad...
      *
      * @param interstitialAd
      * @param interstitialId
-     */
+     *//*
+
     public void admobLoadInterstitialAd(InterstitialAd interstitialAd, String interstitialId) {
 
 
@@ -127,11 +136,13 @@ public class Admob {
         this.mInterstitialAd = interstitialAd;
     }
 
-    /**
+    */
+/**
      * show interstitial ad..
      *
      * @param interstitialAd
-     */
+     *//*
+
     public void showInterstitialAd(InterstitialAd interstitialAd) {
         if (this.mInterstitialAd != null) {
             if (this.mInterstitialAd.isLoaded()) {
@@ -226,6 +237,11 @@ public class Admob {
             }
 
             @Override
+            public void onRewardedVideoCompleted() {
+
+            }
+
+            @Override
             public void onRewardedVideoAdLoaded() {
                 Toast.makeText(context, "onRewardedVideoAdLoaded", Toast.LENGTH_SHORT).show();
             }
@@ -275,3 +291,4 @@ public class Admob {
 
 
 }
+*/

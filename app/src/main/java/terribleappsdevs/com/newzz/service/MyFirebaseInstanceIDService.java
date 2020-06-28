@@ -1,23 +1,24 @@
+/*
 package terribleappsdevs.com.newzz.service;
 
-import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
-import android.support.v4.content.LocalBroadcastManager;
+
+import androidx.annotation.Nullable;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.util.Log;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import terribleappsdevs.com.newzz.Config;
 
 
+*/
 /**
  * Created by yogeshtripathi on 15/3/18.
- */
+ *//*
+
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
@@ -53,3 +54,4 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         editor.commit();
     }
 }
+*/

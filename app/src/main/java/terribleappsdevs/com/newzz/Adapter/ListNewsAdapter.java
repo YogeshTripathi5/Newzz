@@ -3,9 +3,9 @@ package terribleappsdevs.com.newzz.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.customtabs.CustomTabsIntent;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +21,6 @@ import java.util.Date;
 import java.util.List;
 
 import terribleappsdevs.com.newzz.Common.ISO8601DateParser;
-import terribleappsdevs.com.newzz.activity.DetailActivity;
 import terribleappsdevs.com.newzz.Interface.ItemClickListener;
 import terribleappsdevs.com.newzz.R;
 import terribleappsdevs.com.newzz.model.Article;
@@ -112,9 +111,9 @@ public class ListNewsAdapter extends RecyclerView.Adapter<ListNewsViewHolder>{
        @Override
        public void onClick(View view, int pos, boolean isLongClick) {
 
-
            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
            CustomTabsIntent customTabsIntent = builder.build();
+           customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
            customTabsIntent.launchUrl(context, Uri.parse(articleList.get(pos).getUrl()));
 
 /*

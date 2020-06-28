@@ -10,7 +10,7 @@
     android:layout_height="match_parent"
     tools:context="terribleappsdevs.com.newzz.activity.ChannelActivity">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -22,11 +22,11 @@
         android:layout_height="wrap_content" />
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="?actionBarSize"
         android:id="@+id/list_source"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 
 
 </FrameLayout>

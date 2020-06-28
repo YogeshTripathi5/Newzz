@@ -4,16 +4,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import com.google.android.material.navigation.NavigationView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,7 +40,6 @@ import io.branch.referral.BranchError;
 import terribleappsdevs.com.newzz.Login.CoreLoginScreen;
 import terribleappsdevs.com.newzz.R;
 import terribleappsdevs.com.newzz.activity.About;
-import terribleappsdevs.com.newzz.activity.Category;
 import terribleappsdevs.com.newzz.activity.ChannelActivity;
 import terribleappsdevs.com.newzz.activity.Profile;
 import terribleappsdevs.com.newzz.activity.SearchAny;
@@ -260,11 +259,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     // ... insert custom logic here ...
                     Log.i("BRANCH SDK", referringParams.toString());
 
-                    try {
-                    String par= (String) referringParams.get("$og_image_url");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    //                    String par= (String) referringParams.get("$og_image_url");
                 } else {
                     Log.i("BRANCH SDK", error.getMessage());
                 }

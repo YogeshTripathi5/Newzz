@@ -3,17 +3,16 @@ package com.github.florent37.materialviewpager;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+
+
+import androidx.core.view.ViewCompat;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.ListView;
 import android.widget.ScrollView;
 
-import android.support.v4.view.ViewCompat;
 
 import java.util.List;
 
@@ -63,8 +62,8 @@ public class Utils {
     static void setScale(float scale, View... views) {
         for (View view : views) {
             if (view != null) {
-                ViewCompat.setScaleX(view, scale);
-                ViewCompat.setScaleY(view, scale);
+                view.setScaleX(scale);
+                view.setScaleY(scale);
             }
         }
     }

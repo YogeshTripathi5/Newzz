@@ -2,23 +2,16 @@ package terribleappsdevs.com.newzz.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import dmax.dialog.SpotsDialog;
-import terribleappsdevs.com.newzz.Adapter.ListSourceAdapter;
 import terribleappsdevs.com.newzz.R;
-import terribleappsdevs.com.newzz.model.Website;
 
 public class DetailActivity extends AppCompatActivity {
 

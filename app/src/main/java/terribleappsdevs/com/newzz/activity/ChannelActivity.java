@@ -5,15 +5,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,16 +25,18 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.squareup.okhttp.OkHttpClient;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -43,6 +45,7 @@ import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
 import io.paperdb.Paper;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -96,7 +99,7 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
 
         //init cache
         Paper.init(this);
-        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         toolbar.setTitleTextColor((getResources().getColor(R.color.white)));
@@ -494,17 +497,32 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
         protected String doInBackground(String... strings) {
             String url=strings[0];
 
-
-
-
             BufferedReader in = null;
-            try{
-                HttpClient httpclient = new DefaultHttpClient();
+            okhttp3.OkHttpClient client = new okhttp3.OkHttpClient();
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+
+            try {
+                okhttp3.Response response = client.newCall(request).execute();
+                in = new BufferedReader(new InputStreamReader(
+                        response.body().byteStream()));
+                // NEW CODE
+                return in.readLine();
+                // END OF NEW CODE
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            /*try{
+                HttpClient httpClient = HttpClientBuilder.create().build();
 
                 HttpGet request = new HttpGet();
                 URI website = new URI(url);
                 request.setURI(website);
-                HttpResponse response = httpclient.execute(request);
+                HttpResponse response = httpClient.execute(request);
                 in = new BufferedReader(new InputStreamReader(
                         response.getEntity().getContent()));
 
@@ -515,7 +533,7 @@ public class ChannelActivity extends AppCompatActivity implements GoogleApiClien
 
             }catch(Exception e){
                 Log.e("log_tag", "Error in http connection "+e.toString());
-            }
+            }*/
 
         return null;
 
